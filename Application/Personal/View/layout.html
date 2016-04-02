@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>WEB_NAME</title>
-    <link href="Public/css/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <script src="Public/js/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <link href="/Public/css/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script src="/Public/js/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <!--login和register用的样式，用条件语句处理，得到操作名进行判断-->
+    <if condition="$Think.const.ACTION_NAME neq login ">
+        <else/>
+        <link href="/Public/css/login.css" rel="stylesheet" type="text/css"/>
+    </if>
+    <if condition="$Think.const.ACTION_NAME neq register ">
+        <else/>
+        <link href="/Public/css/login.css" rel="stylesheet" type="text/css"/>
+    </if>
+    <!--Bootstrap Validator表单验证-->
+    <script src="/Public/js/Bootstrap%20Validator/b" type="text/javascript"></script>
 </head>
 <body>
 {__CONTENT__}
