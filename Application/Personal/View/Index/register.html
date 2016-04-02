@@ -16,52 +16,81 @@
         <div class="col-md-3" id="left">
         </div>
         <div class="col-md-6 table-bordered" id="center">
-            <form class="form-horizontal" method="post" action="/Personal/index/registerSave" id="loginform">
-                <div class="form-group">
+            <form class="form-horizontal" role="form" data-toggle="validator" method="post"
+                  action="/Personal/index/registerSave" id="registerform">
+                <div class="form-group  has-feedback">
                     <label class="control-label col-md-2 col-md-offset-1" for="username">用户名</label>
 
                     <div class="col-md-9">
-                        <input class="form-control" type="text" name="username" id="username" placeholder="用户名"/>
+                        <input class="form-control" type="text" name="username" id="username" placeholder="用户名"
+                               data-error="用户名不能为空！" required/>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-feedback">
                     <label class="control-label col-md-2 col-md-offset-1" for="password">密码</label>
 
                     <div class="col-md-9">
-                        <input class="form-control" type="password" name="password" id="password" placeholder="密码"/>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="密码"
+                               data-error="密码不能为空" required/>
+
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-feedback">
                     <label class="control-label col-md-3" for="repassword">确认密码</label>
 
                     <div class="col-md-9">
                         <input class="form-control" type="password" name="repassword" id="repassword"
-                               placeholder="确认密码"/>
+                               placeholder="确认密码" data-match="#password" data-match-error="两次输入的密码不匹配"
+                               data-error="密码不能为空" required/>
+
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-feedback">
                     <label class="control-label col-md-3" for="yzm">图形验证</label>
 
                     <div class="col-md-4">
                         <input class="form-control col-md-8" type="text" name="yzm" id="yzm"
-                               placeholder="输入验证码"/>
+                               placeholder="验证码" data-error="验证码不能为空！" required/>
+
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                        <div class="help-block with-errors"></div>
                     </div>
                     <div class="col-md-5">
-                        <img src="/Personal/index/yzm" title="验证码"  width="156px" height="35px"/>
+                        <img src="/Personal/index/yzm" title="验证码" width="156px" height="35px"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group has-feedback">
                     <label class="control-label col-md-2 col-md-offset-1" for="email">邮箱</label>
 
                     <div class="col-md-9">
-                        <input class="form-control" type="text" name="email" id="email" placeholder="邮箱"/>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="邮箱"
+                               data-error="邮箱不能为空" required/>
+
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2 col-md-offset-1" for="mibile">手机</label>
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-2 col-md-offset-1" for="mobile">手机</label>
 
                     <div class="col-md-9">
-                        <input class="form-control" type="text" name="mibile" id="mibile" placeholder="手机"/>
+                        <input class="form-control" type="tel" name="mobile" id="mobile" placeholder="手机号码"
+                               pattern="^1[3-8][0-9]{9}$" data-error="手机号码不能为空" required/>
+
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -121,3 +150,8 @@
         </div>
     </div>
 </div>
+<!--表单验证-->
+<script type="text/javascript">
+    $('#registerform').validator();
+
+</script>

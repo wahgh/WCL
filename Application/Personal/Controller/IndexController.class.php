@@ -45,6 +45,8 @@ class IndexController extends Controller
 
     public function registerSave()
     {
-
+//        var_dump($_POST);
+//        print_r($_SESSION);
+        
     }
 }
