@@ -27,7 +27,7 @@
                                                             aria-haspopup="true" aria-expanded="false">简历向导</a>
                     <ul class="dropdown-menu">
                         <li><a href="/CV/Index/createcv">基本信息</a></li>
-                        <li><a href="#">个人概况</a></li>
+                        <li><a href="#">求职意向</a></li>
 
                     </ul>
                 </li>
@@ -57,18 +57,24 @@
             <div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
-                        <form class="form-horizontal" method="post" action="/CV/index/save"
-                              onsubmit="return check_submit()">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                              action="/CV/index/save" id="cvbasicform">
                             <div class="form-group">
-                                <label class="control-label col-md-5" for="realname">真实姓名:</label>
+                                <label class="control-label col-md-3" for="realname">真实姓名:</label>
 
-                                <div class="col-md-7"><input type="text" class="form-control" name="realname"
-                                                             id="realname"/></div>
+                                <div class="col-md-7 col-md-offset-2"><input type="text" class="form-control" name="realname"
+                                                             id="realname" data-error="姓名不能为空！" required/></div>
+                                <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-5">性别:</label>
+                                <label class="control-label col-md-3" for="photo">照片:</label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-7 col-md-offset-2"><input type="file" name="photo" id="photo"/></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">性别:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="gender" id="genderF" value="F" checked>
@@ -84,44 +90,130 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-5" for="birthday">生日:</label>
+                                <label class="control-label col-md-3" for="birthday">出生年月:</label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-7 col-md-offset-2">
                                     <input type="text" class="form-control" name="birthday" id="birthday"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-5" for="name">行业:</label>
+                                <label class="control-label col-md-3" for="mobile">手机:</label>
 
-                                <div class="col-md-7">
-                                    <select name="industry_id" class="form-control" onchange="Change()"
-                                            id="selindustry">
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="mobile" id="mobile"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="email">邮箱:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="email" id="email"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="school">学校:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="school" id="school"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">最高学历:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="degree_id" class="form-control">
                                         <option value="">请选择</option>
-                                        <foreach name="indsutry_list" item="indsutry">
-                                            <option value=" {$indsutry.id}">{$indsutry.name}</option>
+                                        <foreach name="degree_list" item="degree">
+                                            <option value=" {$degree.id}">{$degree.name}</option>
                                         </foreach>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-5" for="name">职位:</label>
+                                <label class="control-label col-md-3">民族:</label>
 
-                                <div class="col-md-7">
-                                    <select name="function_id" class="form-control" id="selfunc">
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="degree_id" class="form-control">
+                                        <option value="">请选择</option>
+                                        <foreach name="nation_list" item="nation">
+                                            <option value=" {$nation.id}">{$nation.name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">语言:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="language" id="CET4" value="CET4" checked>
+                                            英语四级
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="language" id="CET6" value="CET6">
+                                            英语六级
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="language" id="other" value="other">
+                                            其他外语
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">外语水平</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="level_id" class="form-control">
+                                        <option value="">请选择</option>
+                                        <foreach name="level_list" item="level">
+                                            <option value=" {$level.id}">{$level.name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">居住地省:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="province_id" class="form-control" onchange="Change()" id="selprovince">
+                                        <option value="">请选择</option>
+                                        <foreach name="province_list" item="province">
+                                            <option value=" {$province.id}">{$province.name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">居住地市:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="city_id" class="form-control" id="selcity">
                                         <option value="">请选择</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-5" for="address">地址:</label>
+                                <label class="control-label col-md-3">工作年限:</label>
 
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control" name="address" id="address"/></div>
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="province_id" class="form-control" onchange="Change()" id="selworktime">
+                                        <option value="">请选择</option>
+                                        <foreach name="worktime_list" item="worktime">
+                                            <option value=" {$worktime.id}">{$worktime.name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-5"></label>
+                                <label class="col-md-3"></label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-7 col-md-offset-2">
                                     <input type="submit" class="btn btn-primary col-md-5" value="保存"/>
                                 </div>
                             </div>
@@ -179,3 +271,43 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    /**
+     * 使用插件验证
+     */
+    $('#cvbasicform').validator();
+    /**
+     * 使用datetimepicker插件
+     */
+    $('#birthday').datetimepicker({
+        dayOfWeekStart: 1,
+        timepicker: false,
+        format: 'Y-m-d'
+    });
+    /**
+     * 设置中文显示
+     */
+    $.datetimepicker.setLocale('zh');
+    /**
+     * 省市联动
+     */
+    $("#selprovince").change(function () {
+        /**
+         * 在ajax请求之前把市中的所有数据删掉，这样防止多次ajax请求造成，市中数据积累
+         */
+        $("option").remove(".city");
+        var selprovincevalue = $("#selprovince").val();
+        $.post("/CV/index/getCity", {
+            province_id: selprovincevalue
+        }, function (data) {
+            $.each(data, function (idx, item) {
+                var name = item.name;
+                var id = item.id;
+                /**
+                 * 拿到返回的值在市的下拉列表中添加option
+                 */
+                $("#selcity").append("<option class=" + "city" + " value=" + id + ">" + name + "</option>");
+            });
+        });
+    });
+</script>
