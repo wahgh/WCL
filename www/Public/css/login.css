@@ -1,7 +1,12 @@
-#center {
+#center,#register_top,#login_top{
     background-color: #00b38a;
 }
 
 #loginform {
     padding-top: 20px;
+}
+#logo{
+    background-image: url("/Public/images/logo.png");
+    background-repeat:no-repeat;
+
 }
