@@ -1,0 +1,194 @@
+<div class="container" id="container">
+    <div class="row col-md-6 col-md-offset-3" id="top">
+        <div class="col-md-3">
+            <img src="/Public/images/logo.png" title="企业logo">
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <a href="/Home/index/index" class="col-md-6 col-md-offset-4">
+                <img border="0" width="400" height="55" title="职来职往主页" src="http://img2.goodjobs.cn/files/53055_58.gif">
+            </a>
+        </div>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="nav">
+        <ul class="nav nav-pills nav-justified">
+            <li><a href="">专区首页</a></li>
+            <li><a href="">我的简历</a></li>
+            <li><a href="">找工作</a></li>
+            <li><a href="">求职管理</a></li>
+            <li><a href="">职业指导</a></li>
+            <li><a href="">更新简历</a></li>
+            <li><a href="">交流中心</a></li>
+        </ul>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="body">
+        <div class="col-md-4" id="body_left">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">我的简历</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/CV/Index/createcv">创建简历</a></li>
+                        <li><a href="#">完善简历</a></li>
+                        <li><a href="#">附件</a></li>
+                        <li><a href="#">简历预览</a></li>
+                    </ul>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">求职管理</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">简历投递记录</a></li>
+                        <li><a href="#">企业来信</a></li>
+                        <li><a href="#">回收站</a></li>
+                    </ul>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">个人中心</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">修改密码</a></li>
+                        <li><a href="#">在线帮助</a></li>
+                        <li><a href="#">退出账户</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-7 col-md-offset-1" id="body_right">
+            <h4>我的简历</h4>
+
+            <div></div>
+            <h4>职位搜索</h4>
+
+            <div>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <form class="form-horizontal" method="get" action="/User/index/login" onsubmit="return check_submit()">
+                            <div class="form-group">
+                                <label class="control-label col-md-5" for="name">公司名:</label>
+
+                                <div class="col-md-7"><input type="text" class="form-control" name="companyname"
+                                                             id="name"/></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5" for="name">行业:</label>
+
+                                <div class="col-md-7">
+                                    <select name="industry_id" class="form-control" onchange="Change()" id="selindustry">
+                                        <option value="">请选择</option>
+                                        <foreach name="indsutry_list" item="indsutry">
+                                            <option value=" {$indsutry.id}">{$indsutry.name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5" for="name">职位:</label>
+
+                                <div class="col-md-7">
+                                    <select name="function_id" class="form-control" id="selfunc">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5" for="address">地址:</label>
+
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" name="address" id="address"/></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-5"></label>
+
+                                <div class="col-md-7">
+                                    <input type="submit" class="btn btn-primary col-md-5" value="开始搜索"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+            <h4>职位推荐</h4>
+
+            <div></div>
+        </div>
+    </div>
+    <div class="row col-md-8 col-md-offset-2"></div>
+    <div class="row col-md-8 col-md-offset-2" id="bottom">
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>服务热线</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li>总机：0551-63400800</li>
+                        <li>企业：0551-65666555</li>
+                        <li>个人：0551-65666558</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>关于我们</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li><a href="http://www.goodjobs.cn/about/index.html">公司简介</a></li>
+                        <li><a href="http://www.goodjobs.cn/about/copyright.html">声明顾问</a></li>
+                        <li><a href="http://www.goodjobs.cn/sitemap.html">站点地图</a></li>
+                        <li><a href="http://feedback.goodjobs.cn/">意见反馈</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>产品</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li><a href="/Home/index/index">企业招聘</a></li>
+                        <li><a href="http://learning.goodjobs.cn/">个人培训</a></li>
+                        <li><a href="http://www.goodjobs.cn/about/price.html">服务报价</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul>
+                <strong>关注微信</strong>
+                <img src="http://www.goodjobs.cn/images/wx.png" title="微信"/>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#selindustry").change(function () {
+        /**
+         * 在ajax请求之前把职位中的所有数据删掉，这样防止多次ajax请求造成，职位中数据积累
+         */
+        $("option").remove(".func");
+        var seldustryvalue = $("#selindustry").val();
+        $.post("/CV/index/getFunction", {
+            industry_id: seldustryvalue
+        }, function (data) {
+            $.each(data, function (idx, item) {
+                var name = item.name;
+                var id = item.id;
+                /**
+                 * 拿到返回的值在职位的下拉列表中添加option
+                 */
+                $("#selfunc").append("<option class=" + "func" + " value=" + id + ">" + name + "</option>");
+            });
+        });
+    });
+    function check_submit() {
+        var name=$('#name').val();
+        var selindustry=$('#selindustry').val();
+        var selfunc=$('#selfunc').val();
+        var address=$('#address').val();
+        if(name||selindustry||selfunc||address) {
+            return true;
+        }else {
+            alert('至少填写一项！');
+            return false;
+        }
+    }
+</script>

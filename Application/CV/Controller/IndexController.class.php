@@ -7,6 +7,51 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+        /**
+         * 获取行业信息
+         */
+        $industry = M('industry');
+        $this->indsutry_list = $industry->field('id,name')->order('id')->select();
+        /**
+         * 调用home模板
+         */
+        $this->display();
+    }
+
+    /***
+     * ajax方式获取行业对应的职位
+     * @param $industry_id
+     */
+    public function getFunction($industry_id)
+    {
+        /**
+         * ajax请求传过来的行业id,,为职位表的外键
+         */
+        $industry_id = I('post.industry_id');
+        /**
+         * 获取职位信息
+         */
+        $function = M('function');
+        $function_list = $function->where(['industry_id' => $industry_id])->field('id,name')->order('id')->select();
+        /**
+         * 转换成json格式返回
+         */
+        $this->ajaxReturn($function_list);
+    }
+
+    /**
+     * 创建一个简历
+     */
+    public function createcv()
+    {
+        $user_id = $_SESSION['sess_wcl']['id'];
+        if ($user_id) {
+            $this->display();
+        } else {
+            /**
+             * 没有session，说明根本没有登录，让他去登录页
+             */
+            $this->error('您还没有登录，不能创建简历', '/User/Index/login');
+        }
     }
 }

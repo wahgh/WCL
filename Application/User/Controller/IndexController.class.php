@@ -67,7 +67,7 @@ class IndexController extends Controller
                         'id' => $user_id,
                         'username' => $arr['username'],
                     ];
-                    $this->success('恭喜' . $arr['username'] . '用户登录成功，跳转到用户主页', '/User/index/index');
+                    $this->success('恭喜' . $arr['username'] . '用户登录成功，跳转到用户主页', '/CV/index/index');
                 } else {
                     $this->error('用户名和密码错误！');
                 }
@@ -101,10 +101,24 @@ class IndexController extends Controller
             $this->error($user->getError());
         } else {
             // 验证通过 可以进行其他数据操作
-
+            $username=I('post.username');
             $result = $user->add();
             if ($result) {
-                $this->success('新增成功', '/User/index/index');
+                $condition['username']=$username;
+                $arr=$user->field('id,username')->where($condition)->find();
+                /**
+                 * 拿到用户id
+                 */
+                $user_id = $arr['id'];
+                /**
+                 * 说明有该用户，登录成功，把登录成功标志is_auth，登录用户id，登录用户用户名username放进session中
+                 */
+                $_SESSION['sess_wcl'] = [
+                    'is_auth' => true,
+                    'id' => $user_id,
+                    'username' => $arr['username'],
+                ];
+                $this->success('新增成功', '/CV/index/index');
             } else {
                 $this->error('写入错误');
             }
