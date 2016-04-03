@@ -17,5 +17,7 @@ return array(
         'IMAGE_PATH' => '/Public/images',
         'UPLOAD_IMAGE_PATH' => '/upload/images'
     ],
+    // 显示页面Trace信息
+    'SHOW_PAGE_TRACE' =>true,
     //'配置项'=>'配置值'
 );

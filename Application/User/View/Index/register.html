@@ -5,7 +5,7 @@
             <a href="login.php">请登录</a>
         </div>
         <div class="col-md-2 col-md-offset-8">
-            <a href="/Personal/index/view">首页</a>
+            <a href="/User/index/view">首页</a>
             <a href="#">帮助中心</a>
         </div>
     </div>
@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-6 table-bordered" id="center">
             <form class="form-horizontal" role="form" data-toggle="validator" method="post"
-                  action="/Personal/index/registerSave" id="registerform">
+                  action="/User/index/registerSave" id="registerform">
                 <div class="form-group  has-feedback">
                     <label class="control-label col-md-2 col-md-offset-1" for="username">用户名</label>
 
@@ -55,21 +55,6 @@
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <label class="control-label col-md-3" for="yzm">图形验证</label>
-
-                    <div class="col-md-4">
-                        <input class="form-control col-md-8" type="text" name="yzm" id="yzm"
-                               placeholder="验证码" data-error="验证码不能为空！" required/>
-
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="col-md-5">
-                        <img src="/Personal/index/yzm" title="验证码" width="156px" height="35px"/>
-                    </div>
-                </div>
-                <div class="form-group has-feedback">
                     <label class="control-label col-md-2 col-md-offset-1" for="email">邮箱</label>
 
                     <div class="col-md-9">
@@ -92,13 +77,6 @@
 
                         <div class="help-block with-errors"></div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-8 col-md-offset-2">
-                        <input type="checkbox" checked="true" name="agree" value="ischecked">
-                        <span>我已经阅读并同意</span>
-                        <a href="agreement.html">&lt;&lt;用户注册协议&gt;&gt;</a>
-                    </label>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3"></label>
