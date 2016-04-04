@@ -101,11 +101,11 @@ class IndexController extends Controller
             $this->error($user->getError());
         } else {
             // 验证通过 可以进行其他数据操作
-            $username=I('post.username');
+            $username = I('post.username');
             $result = $user->add();
             if ($result) {
-                $condition['username']=$username;
-                $arr=$user->field('id,username')->where($condition)->find();
+                $condition['username'] = $username;
+                $arr = $user->field('id,username')->where($condition)->find();
                 /**
                  * 拿到用户id
                  */
@@ -118,7 +118,7 @@ class IndexController extends Controller
                     'id' => $user_id,
                     'username' => $arr['username'],
                 ];
-                $this->success('新增成功', '/CV/index/index');
+                $this->success('注册成功，页面跳到个人专区主页', '/CV/index/index');
             } else {
                 $this->error('写入错误');
             }
@@ -128,7 +128,9 @@ class IndexController extends Controller
 
     public function logout()
     {
-        unset($_SESSION);
+        if (isset($_SESSION['sess_wcl']['is_auth'])) {
+            unset($_SESSION['sess_wcl']);
+        }
         $this->redirect('Home/index/index', '', 2, '页面跳转中...');
     }
 }

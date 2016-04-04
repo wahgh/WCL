@@ -11,7 +11,7 @@
     </div>
     <div class="row col-md-8 col-md-offset-2" id="nav">
         <ul class="nav nav-pills nav-justified">
-            <li><a href="/CV/Index/index">专区首页</a></li>
+            <li><a href="/CV/index/index">专区首页</a></li>
             <li><a href="/CV/Index/showcv">我的简历</a></li>
             <li><a href="">找工作</a></li>
             <li><a href="">求职管理</a></li>
@@ -26,9 +26,9 @@
                 <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                                             aria-haspopup="true" aria-expanded="false">简历向导</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/CV/Index/BasicAdd">基本信息创建</a></li>
-                        <li><a href="/Job/Index/jobAdd">求职意向创建</a></li>
-                        <li><a href="/Edu/Index/eduAdd">教育经历创建</a></li>
+                        <li><a href="/CV/Index/BasicAdd">基本信息</a></li>
+                        <li><a href="/Job/Index/jobAdd">求职意向</a></li>
+                        <li><a href="/Edu/Index/eduAdd">教育经历</a></li>
 
                     </ul>
                 </li>
@@ -47,13 +47,71 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">修改密码</a></li>
                         <li><a href="#">在线帮助</a></li>
-                        <li><a href="/User/index/logout">退出账户</a></li>
+                        <li><a href="#">退出账户</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
         <div class="col-md-7 col-md-offset-1" id="body_right">
+            <h4>教育经历</h4>
 
+            <div>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                              action="/Edu/Index/eduSave" id="cvexperienceform">
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="hidden" class="form-control" name="cv_id" value="{$cv_id}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="fromdate">开始日期:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="fromdate" id="fromdate"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="todate">结束日期:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="todate" id="todate"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="school">学校:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="school" id="school"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">学历:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="degree_id" class="form-control">
+                                        <option value="">请选择</option>
+                                        <foreach name="degree_list" item="degree">
+                                            <option value=" {$degree.id}">{$degree.name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3"></label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="submit" class="btn btn-primary col-md-5" value="保存"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row col-md-8 col-md-offset-2"></div>
@@ -103,3 +161,22 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    /**
+     * 使用datetimepicker插件
+     */
+    $('#fromdate').datetimepicker({
+        dayOfWeekStart: 1,
+        timepicker: false,
+        format: 'Y-m-d'
+    });
+    $('#todate').datetimepicker({
+        dayOfWeekStart: 1,
+        timepicker: false,
+        format: 'Y-m-d'
+    });
+    /**
+     * 设置中文显示
+     */
+    $.datetimepicker.setLocale('zh');
+</script>

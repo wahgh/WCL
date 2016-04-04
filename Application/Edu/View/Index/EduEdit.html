@@ -11,12 +11,12 @@
     </div>
     <div class="row col-md-8 col-md-offset-2" id="nav">
         <ul class="nav nav-pills nav-justified">
-            <li><a href="/CV/Index/index">专区首页</a></li>
+            <li><a href="/CV/index/index">专区首页</a></li>
             <li><a href="/CV/Index/showcv">我的简历</a></li>
             <li><a href="">找工作</a></li>
             <li><a href="">求职管理</a></li>
             <li><a href="">职业指导</a></li>
-            <li><a href="/CV/Index/editcv">更新简历</a></li>
+            <li><a href="">更新简历</a></li>
             <li><a href="">交流中心</a></li>
         </ul>
     </div>
@@ -24,12 +24,11 @@
         <div class="col-md-4" id="body_left">
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">我的简历</a>
+                                                            aria-haspopup="true" aria-expanded="false">简历向导</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/CV/Index/createcv">创建简历</a></li>
-                        <li><a href="/CV/Index/editcv">完善简历</a></li>
-                        <li><a href="#">附件</a></li>
-                        <li><a href="/CV/Index/showcv">简历预览</a></li>
+                        <li><a href="/CV/Index/BasicEdit">基本信息</a></li>
+                        <li><a href="/Job/Index/jobEditList">求职意向</a></li>
+                        <li><a href="/Edu/Index/eduEditList">教育经历</a></li>
                     </ul>
                 </li>
                 <li role="separator" class="divider"></li>
@@ -47,76 +46,81 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">修改密码</a></li>
                         <li><a href="#">在线帮助</a></li>
-                        <li><a href="/User/index/logout">退出账户</a></li>
+                        <li><a href="#">退出账户</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
         <div class="col-md-7 col-md-offset-1" id="body_right">
-            <div>
-                <table class="table table-bordered table-condensed table-striped text-center">
-                    <caption><h4>我的简历</h4></caption>
-                    <tr>
-                        <th>简历名称</th>
-                        <th>更新时间</th>
-                        <th colspan="2">相关操作</th>
-                    </tr>
-                    <foreach name="basic_list" item="basic">
-                        <tr>
-                            <td>{$basic.realname}</td>
-                            <td>{$basic.updated_at}</td>
-                            <td><a href="/CV/Index/editcv">编辑</a></td>
-                            <td><a href="/CV/Index/showcv">预览</a></td>
-                        </tr>
-                    </foreach>
-                </table>
-            </div>
-            <h4>职位搜索</h4>
+            <h4>教育经历</h4>
 
             <div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
-                        <form class="form-horizontal" method="get" action="/User/index/login"
-                              onsubmit="return check_submit()">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                              action="/Edu/Index/eduEditSave" id="cvexperienceform">
                             <div class="form-group">
-                                <label class="control-label col-md-5" for="name">公司名:</label>
+                                <label class="control-label col-md-3"></label>
 
-                                <div class="col-md-7"><input type="text" class="form-control" name="companyname"
-                                                             id="name"/></div>
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="hidden" class="form-control" name="cv_id" value="{$cv_id}"/>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-5">行业:</label>
+                                <label class="control-label col-md-3"></label>
 
-                                <div class="col-md-7">
-                                    <select name="industry_id" class="form-control" onchange="Change()"
-                                            id="selindustry">
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="hidden" class="form-control" name="id" value="{$edu[0].id}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="fromdate">开始日期:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="fromdate" id="fromdate"
+                                           value="{$edu[0].fromdate}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="todate">结束日期:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="todate" id="todate"
+                                           value="{$edu[0].todate}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="school">学校:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="school" id="school"
+                                           value="{$edu[0].school}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">学历:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="degree_id" class="form-control">
                                         <option value="">请选择</option>
-                                        <foreach name="indsutry_list" item="indsutry">
-                                            <option value=" {$indsutry.id}">{$indsutry.name}</option>
+                                        <foreach name="degree_list" item="degree">
+                                            <eq name="edu[0].degree_id" value="$degree.id">
+                                                <option value=" {$degree.id}" selected="selected">{$degree.name}
+                                                </option>
+                                                </option>
+                                                <else/>
+                                                <option value=" {$degree.id}">{$degree.name}</option>
+                                            </eq>
+
                                         </foreach>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-5">职位:</label>
+                                <label class="col-md-3"></label>
 
-                                <div class="col-md-7">
-                                    <select name="function_id" class="form-control" id="selfunc">
-                                        <option value="">请选择</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-5" for="address">地址:</label>
-
-                                <div class="col-md-7">
-                                    <input type="text" class="form-control" name="address" id="address"/></div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-5"></label>
-
-                                <div class="col-md-7">
-                                    <input type="submit" class="btn btn-primary col-md-5" value="开始搜索"/>
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="submit" class="btn btn-primary col-md-5" value="修改"/>
                                 </div>
                             </div>
                         </form>
@@ -124,9 +128,6 @@
                     <div class="panel-footer"></div>
                 </div>
             </div>
-            <h4>职位推荐</h4>
-
-            <div></div>
         </div>
     </div>
     <div class="row col-md-8 col-md-offset-2"></div>
@@ -177,35 +178,21 @@
     </div>
 </div>
 <script type="text/javascript">
-    $("#selindustry").change(function () {
-        /**
-         * 在ajax请求之前把职位中的所有数据删掉，这样防止多次ajax请求造成，职位中数据积累
-         */
-        $("option").remove(".func");
-        var seldustryvalue = $("#selindustry").val();
-        $.post("/CV/index/getFunction", {
-            industry_id: seldustryvalue
-        }, function (data) {
-            $.each(data, function (idx, item) {
-                var name = item.name;
-                var id = item.id;
-                /**
-                 * 拿到返回的值在职位的下拉列表中添加option
-                 */
-                $("#selfunc").append("<option class=" + "func" + " value=" + id + ">" + name + "</option>");
-            });
-        });
+    /**
+     * 使用datetimepicker插件
+     */
+    $('#fromdate').datetimepicker({
+        dayOfWeekStart: 1,
+        timepicker: false,
+        format: 'Y-m-d'
     });
-    function check_submit() {
-        var name = $('#name').val();
-        var selindustry = $('#selindustry').val();
-        var selfunc = $('#selfunc').val();
-        var address = $('#address').val();
-        if (name || selindustry || selfunc || address) {
-            return true;
-        } else {
-            alert('至少填写一项！');
-            return false;
-        }
-    }
+    $('#todate').datetimepicker({
+        dayOfWeekStart: 1,
+        timepicker: false,
+        format: 'Y-m-d'
+    });
+    /**
+     * 设置中文显示
+     */
+    $.datetimepicker.setLocale('zh');
 </script>
