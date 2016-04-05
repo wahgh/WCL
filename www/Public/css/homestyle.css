@@ -1,0 +1,52 @@
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,input{margin:0;padding:0; font-family:"Times New Roman",Georgia,Serif; ;}
+img{border:none;}
+li{list-style:none;}
+input,select,textarea{outline:none;}
+textarea{resize:none;}
+a{text-decoration:none;}
+
+/* 清浮动*/
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom:1;}
+.contenter{margin-right: auto; margin-left: auto; width: 1202px}
+.footer{margin-right: auto; margin-left: auto;width: 1202px}
+.secondContent{margin-right: auto; margin-left: auto;width: 1202px}
+
+.topSecond{width: 100px;margin-left: auto;margin-right: auto}
+.topBar{height: 36px;width: 100%; background-color:#00b38a;
+; font-size: 12px;font-weight: bold}
+.topBar a{color:#FCEBEB}
+.contain{height: 35px;width: 1202px; margin-left: auto;margin-right: auto}
+.leftArea{line-height: 36px; float: left;margin-left: 90px}
+.rightArea{float: right;margin-left: 870px;}
+.logBar{height: 80px;width: 1202px;margin-left: auto;margin-right: auto}
+.log img{margin-left: -22px;
+    margin-top: 5px;}
+.log{float: left}
+.rightBanner{float: right;margin-right: 550px; margin-top: 16px;}
+.rightBanner li{font-size: 18px;font-weight: bold;}
+.rightBanner a{color: #777777}
+.loginRight{float: right;margin-top: 18px;
+    margin-right: -750px; font-size: 14px; font-family: "Times New Roman", Georgia, Serif; font-weight: bold}
+.loginRight a{color:#777777}
+.leftCenter{
+    position: static;
+}
+
+
+.citySt{
+    margin-left: 236px;
+    margin-top: -40px;
+}
+.caiwu{
+  margin-top: 124px;
+}
+.renli{
+    display: block;
+    margin-top: 251px;
+}
+.xiaoshou{
+    display: block;
+    margin-top: 124px;
+}
+
