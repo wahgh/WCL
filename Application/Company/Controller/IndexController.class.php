@@ -73,8 +73,8 @@ class IndexController extends Controller
                      * 说明有该用户，登录成功，把登录成功标志is_auth，登录用户id，登录用户用户名username放进session中
                      */
                     $_SESSION['sess_wcl'] = [
-                        'is_auth' => true,
-                        'id' => $user_id,
+                        'company_auth' => true,
+                        'company_id' => $user_id,
                         'username' => $arr['username'],
                     ];
                     $this->success('恭喜' . $arr['username'] . '用户登录成功，跳转到企业用户主页', '/Company/index/index');
@@ -114,8 +114,8 @@ class IndexController extends Controller
                  * 说明有该用户，登录成功，把登录成功标志is_auth，登录用户id，登录用户用户名username放进session中
                  */
                 $_SESSION['sess_wcl'] = [
-                    'is_auth' => true,
-                    'id' => $user_id,
+                    'company_auth' => true,
+                    'company_id' => $user_id,
                     'username' => $arr['username'],
                 ];
                 $this->success('注册成功，页面跳到个人专区主页', '/Company/index/index');

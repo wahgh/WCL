@@ -9,20 +9,27 @@ class IndexController extends Controller
     public function index()
     {
         $user_id = $_SESSION['sess_wcl']['id'];
-        /**
-         * 获取行业信息
-         */
-        $industry = M('industry');
-        $this->indsutry_list = $industry->field('id,name')->order('id')->select();
-        /**
-         * 获取基本信息
-         */
-        $cv = M('cv');
-        $this->basic_list = $cv
-            ->where([' wcl_cv.user_id' => $user_id])
-            ->field('wcl_cv.realname,wcl_cv.id,wcl_cv.updated_at')
-            ->select();
-        $this->display();
+        if($user_id) {
+            /**
+             * 获取行业信息
+             */
+            $industry = M('industry');
+            $this->indsutry_list = $industry->field('id,name')->order('id')->select();
+            /**
+             * 获取基本信息
+             */
+            $cv = M('cv');
+            $this->basic_list = $cv
+                ->where([' wcl_cv.user_id' => $user_id])
+                ->field('wcl_cv.realname,wcl_cv.id,wcl_cv.updated_at')
+                ->select();
+            $this->display();
+        }else {
+            /**
+             * 没有session，说明根本没有登录，让他去登录页
+             */
+            $this->error('您还没有登录，不能创建简历', '/User/Index/login');
+        }
     }
 
     /***
