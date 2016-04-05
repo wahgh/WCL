@@ -77,7 +77,7 @@ class IndexController extends Controller
                         'id' => $user_id,
                         'username' => $arr['username'],
                     ];
-                    $this->success('恭喜' . $arr['username'] . '用户登录成功，跳转到用户主页', '/Company/index/index');
+                    $this->success('恭喜' . $arr['username'] . '用户登录成功，跳转到企业用户主页', '/Company/index/index');
                 } else {
                     $this->error('用户名和密码错误！');
                 }
