@@ -198,7 +198,7 @@ class IndexController extends Controller
         if (isset($_SESSION['sess_wcl']['company_auth'])) {
             unset($_SESSION['sess_wcl']);
         }
-        $this->redirect('Company/index/index', '', 2, '页面跳转中...');
+        $this->redirect('Home/index/index', '', 2, '页面跳转中...');
     }
 
 }
