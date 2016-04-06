@@ -27,7 +27,7 @@ class IndexController extends Controller
         $company_id = $_SESSION['sess_wcl']['company_id'];
         if ($company_id) {
             $cv = M('cominfo');
-            $cominfo = $cv->where(['user_id' => $company_id])->field('id,name')->select();
+            $cominfo = $cv->where(['companyuser_id' => $company_id])->field('id,name')->select();
             if ($cominfo) {
                 /**
                  * 已经创建过企业基本信息
