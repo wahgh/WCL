@@ -8,7 +8,15 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $this->display();
+        if(isset($_SESSION['sess_wcl']['company_auth'])&&$_SESSION['sess_wcl']['company_auth']) {
+            $this->display();
+        }else {
+            /**
+             * 没有session，说明根本没有登录，让他去登录页
+             */
+            $this->error('您还没有登录，无法访问该网页！', '/Company/Index/login');
+        }
+
     }
 
     /**
