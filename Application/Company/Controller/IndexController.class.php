@@ -26,6 +26,70 @@ class IndexController extends Controller
         $this->display();
     }
 
+    /*
+     * 公司基本信息
+     */
+
+    public  function companyshow(){
+        $user_id = $_SESSION['sess_wcl']['company_id'];
+        if($user_id){
+            /*
+             * 通过user_id ,取得创建公司的用户名和id
+             */
+
+            // $company = M('company');
+            // $user_id= $company->field('id')->select();
+            $cominfo = M('cominfo');
+            $companyinfo = $cominfo->where(['companyuser_id' => $user_id ])->field('id,name')->select();
+
+            // echo $company->getLastSql();
+            if($companyinfo){
+                /*
+                 * 已经创建过公司就把公司基本信息拿过来
+                 */
+                $cominfo = M('cominfo');
+                $company = M('company');
+                $this->cominfo_list = $company
+                    ->where(['wcl_cominfo.companyuser_id' =>$user_id])
+                    ->join('left join wcl_cominfo on   wcl_company.id  = wcl_cominfo.companyuser_id')
+                    ->join('left join wcl_companytype on wcl_companytype.id = wcl_cominfo.companytype_id ')
+                    ->join('left join wcl_province on wcl_province.id = wcl_cominfo.province_id')
+                    ->join('left join wcl_city on wcl_city.id = wcl_cominfo.city_id')
+                    ->join('left join wcl_industry on wcl_industry.id = wcl_cominfo.industry_id')
+                    ->field('wcl_companytype.name as companytype_name,wcl_province.name as province_name,wcl_city.name as city_name,wcl_industry.name as industry_name,wcl_cominfo.registercash,wcl_cominfo.people,wcl_cominfo.cetificate,wcl_cominfo.zidcode,wcl_cominfo.address,wcl_cominfo.name,wcl_cominfo.imagepath,wcl_cominfo.imagename')
+                    ->select();
+
+
+                /*
+                 * 把职位的基本信息拿出来
+                 */
+
+                $jianli =M('post');
+                $ok = $this->post_list = $jianli
+                    //->where(['wcl_cominfo.companyuser_id' =>$user_id])
+                    //->join('left join wcl_company_cv on wcl_company_cv.companyuser_id = wcl_company.id')
+                    ->join('left join wcl_cominfo on wcl_post.companyinfo_id = wcl_cominfo.id')
+                    //->join('left join wcl_cv on wcl_cv.id = wcl_company_cv.cv_id')
+                    //->join('left join wcl_post on wcl_company.id = wcl_post.companyinfo_id')
+                    ->join('left join wcl_salary on wcl_salary.id = wcl_post.salary_id')
+                    ->join('left join wcl_worktime on wcl_worktime.id = wcl_post.worktime_id')
+                    ->join('left join wcl_function on wcl_function.id = wcl_post.function_id')
+                    ->join('left join wcl_industry on wcl_industry.id = wcl_function.industry_id')
+                    ->field('wcl_post.peoplenumber,wcl_salary.cash,wcl_post.birthday,wcl_worktime.name as worktime_name,wcl_post.contact,wcl_post.mobile,wcl_post.netaddress,wcl_post.context,wcl_function.name as function_name,wcl_industry.name as industry_name')
+                    ->select();
+                $this->display();
+
+            }else{
+                $this->error('你还没有创建公司信息，将进入简历公司创建页','/Cominfo/index/create');
+            }
+        }else{
+            /*
+             * 没有session，说明还没有登录，将进入企业登录页
+             */
+            $this->error('你还没有登录，将进入企业登录页','/Company/index/login');
+        }
+    }
+
     /**
      * 生成验证码，登录验证使用
      */
