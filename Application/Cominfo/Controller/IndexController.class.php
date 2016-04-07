@@ -37,9 +37,9 @@ class IndexController extends Controller
                     ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
                     ->field('wcl_post.id,wcl_post.created_at,wcl_function.name as function_name')
                     ->select();
-                var_dump($this->post_list);
+                $this->display();
             }
-            $this->display();
+
         }else {
             /**
              * 没有session，说明根本没有登录，让他去登录页
