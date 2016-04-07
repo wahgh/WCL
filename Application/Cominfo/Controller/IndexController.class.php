@@ -21,7 +21,7 @@ class IndexController extends Controller
              */
             $degree = M('degree');
             $this->degree_list = $degree->field('id,name')->order('id')->select();
-           
+
             if ($user_id) {
                 /**
                  * 取companyinfo_id
