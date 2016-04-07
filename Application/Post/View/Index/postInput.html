@@ -1,0 +1,312 @@
+<div class="container" id="container">
+    <div class="row col-md-6 col-md-offset-3" id="top">
+        <div class="col-md-3">
+            <img src="/Public/images/logo.png" title="企业logo">
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <a href="/Home/index/index" class="col-md-6 col-md-offset-4">
+                <img border="0" width="400" height="55" title="职来职往主页" src="http://img2.goodjobs.cn/files/53055_58.gif">
+            </a>
+        </div>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="nav">
+        <ul class="nav nav-pills nav-justified">
+            <li><a href="/Company/Index/index">专区首页</a></li>
+            <li><a href="/Company/index/showpost">我的职位</a></li>
+            <li><a href="">找人才</a></li>
+            <li><a href="">人才管理</a></li>
+            <li><a href="">职业指导</a></li>
+            <li><a href="/Cominfo/index/edit">更新职位</a></li>
+            <li><a href="">交流中心</a></li>
+        </ul>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="body">
+        <div class="col-md-4" id="body_left">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">职位向导</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Cominfo/Index/comInfoAdd">企业基本信息创建</a></li>
+                        <li><a href="/Post/Index/postAdd">职位信息创建</a></li>
+                    </ul>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">招聘管理</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">简历投递记录</a></li>
+                        <li><a href="#">简历投递</a></li>
+                        <li><a href="#">回收站</a></li>
+                    </ul>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">个人中心</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">修改密码</a></li>
+                        <li><a href="#">在线帮助</a></li>
+                        <li><a href="/Company/index/logout">退出账户</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-7 col-md-offset-1" id="body_right">
+            <h4>发布职位必填信息</h4>
+
+            <div>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="post"
+                              action="/Post/index/postInputSave" id="postbasicform">
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="hidden" class="form-control" name="companyinfo_id" value="post_list.companyinfo_id"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" >行业:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="industry_id" class="form-control" onchange="Change()"
+                                            id="selindustry">
+                                        <option value="">请选择</option>
+                                        <foreach name="indsutry_list" item="indsutry">
+                                            <eq name="$indsutry_list[0].indsutry_id" value="$indsutry.id">
+                                                <option value="{$indsutry.id}" selected="selected">{$indsutry.name}
+                                                </option>
+                                                <else/>
+                                                <option value="{$indsutry.id}">{$indsutry.name}</option>
+                                            </eq>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" >职位:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="function_id" class="form-control" id="selfunc">
+                                        <option value="">请选择</option>
+                                        <option value="{$city_list[0].id}" selected="selected">{$city_list[0].name}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="peoplenumber">招聘人数:</label>
+
+                                <div class="col-md-7 col-md-offset-2"><input type="text" class="form-control"
+                                           name="peoplenumber"
+                                           value="{$post_list.peoplenumber}"
+                                           id="peoplenumber" data-error="默认为0表示若干"
+                                           required/></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">职位薪水:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <div class="radio">
+                                        <select name="salary_id" class="form-control">
+                                            <option value="">请选择</option>
+                                            <foreach name="salary_list" item="salary">
+                                                <option value=" {$salary.id}">{$salary.cash}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="birthday">要求年龄:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="birthday" value="{$post_list.birthday}" id="birthday"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="mobile">联系人:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="contact" value="{$post_list.contact}" id="contact"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="mobile">联系电话:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="mobile" value="{$post_list.mobile}" id="mobile"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">公司网址:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="text" class="form-control" name="netaddress" value="{$post_list.netaddress}" id="netaddress"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">应聘要求:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <textarea type="text" class="form-control" name="context" id="context">
+                                        {$post_list.context}
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">工作年限:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <select name="worktime_id" class="form-control" onchange="Change()"
+                                            id="selworktime">
+                                        <option value="">请选择</option>
+                                        <foreach name="worktime_list" item="worktime">
+                                            <!-- 采用eq进行比较-->
+                                            <eq name="basic_list[0].worktime_id" value="$worktime.id">
+                                                <option value=" {$worktime.id}" selected="selected">{$worktime.name}
+                                                </option>
+                                                <else/>
+                                                <option value=" {$worktime.id}">{$worktime.name}</option>
+                                            </eq>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">住房要求:</label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <div class="radio">
+
+                                        <eq name="post_list.house" id="houseY" value="Y">
+                                            <label>
+                                                <input type="radio" name="house" id="houseY" value="Y" checked>
+                                                有
+                                            </label>
+                                            <else/>
+                                            <label>
+                                                <input type="radio" name="house" id="houseN" value="N">
+                                                无
+                                            </label>
+                                        </eq>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3"></label>
+
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input type="submit" class="btn btn-primary col-md-5" value="修改"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-8 col-md-offset-2"></div>
+    <div class="row col-md-8 col-md-offset-2" id="bottom">
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>服务热线</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li>总机：0551-63400800</li>
+                        <li>企业：0551-65666555</li>
+                        <li>个人：0551-65666558</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>关于我们</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li><a href="http://www.goodjobs.cn/about/index.html">公司简介</a></li>
+                        <li><a href="http://www.goodjobs.cn/about/copyright.html">声明顾问</a></li>
+                        <li><a href="http://www.goodjobs.cn/sitemap.html">站点地图</a></li>
+                        <li><a href="http://feedback.goodjobs.cn/">意见反馈</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>产品</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li><a href="/Home/index/index">企业招聘</a></li>
+                        <li><a href="http://learning.goodjobs.cn/">个人培训</a></li>
+                        <li><a href="http://www.goodjobs.cn/about/price.html">服务报价</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul>
+                <strong>关注微信</strong>
+                <img src="http://www.goodjobs.cn/images/wx.png" title="微信"/>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#selindustry").change(function () {
+        /**
+         * 在ajax请求之前把职位中的所有数据删掉，这样防止多次ajax请求造成，职位中数据积累
+         */
+        $("option").remove(".func");
+        var seldustryvalue = $("#selindustry").val();
+        $.post("/CV/index/getFunction", {
+            industry_id: seldustryvalue
+        }, function (data) {
+            $.each(data, function (idx, item) {
+                var name = item.name;
+                var id = item.id;
+                /**
+                 * 拿到返回的值在职位的下拉列表中添加option
+                 */
+                $("#selfunc").append("<option class=" + "func" + " value=" + id + ">" + name + "</option>");
+            });
+        });
+    });
+    function check_submit() {
+        var name = $('#name').val();
+        var selindustry = $('#selindustry').val();
+        var selfunc = $('#selfunc').val();
+        var address = $('#address').val();
+        if (name || selindustry || selfunc || address) {
+            return true;
+        } else {
+            alert('至少填写一项！');
+            return false;
+        }
+    }
+
+</script>
+<script>
+    /**
+     * 使用插件验证
+     */
+    $('#postbasicform').validator();
+    /**
+     * 使用datetimepicker插件
+     */
+    $('#birthday').datetimepicker({
+        dayOfWeekStart: 1,
+        timepicker: false,
+        format: 'Y-m-d'
+    });
+    /**
+     * 设置中文显示
+     */
+    $.datetimepicker.setLocale('zh');
+
+</script>

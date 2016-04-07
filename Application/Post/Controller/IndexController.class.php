@@ -7,6 +7,207 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+
+        if(isset($_SESSION['sess_wcl']['company_auth'])&&$_SESSION['sess_wcl']['company_auth']) {
+            /**
+             * 获取行业信息
+             */
+            $industry = M('industry');
+            $this->indsutry_list = $industry->field('id,name')->order('id')->select();
+
+        }else {
+            /**
+             * 没有session，说明根本没有登录，让他去登录页
+             */
+            $this->error('您还没有登录，无法访问该网页！', '/Company/Index/login');
+        }
     }
+
+    /**
+     * 新增基本信息
+     */
+
+    public function postAdd()
+    {
+        $user_id = $_SESSION['sess_wcl']['company_id'];
+        if ($user_id) {
+            /**
+             * 取companyinfo_id
+             */
+            $company = M('Company');
+            $cominfo = $company
+                ->where(['wcl_cominfo.companyuser_id' => $user_id])
+                ->join('left join wcl_cominfo on wcl_company.id=wcl_cominfo.companyuser_id')
+                ->field('wcl_cominfo.id')
+                ->select();
+            if( $cominfo) {
+                $this->assign('companyinfo_id', $cominfo[0]['id']);
+                /**
+                 * 行业职位
+                 */
+                $industry = M('industry');
+                $this->indsutry_list = $industry->field('id,name')->order('id')->select();
+                /**
+                 * 薪水
+                 */
+                $salary = M('salary');
+                $this->salary_list = $salary->field('id,cash')->select();
+                /**
+                 * 工作年限列表
+                 */
+                $worktime = M('worktime');
+                $this->worktime_list = $worktime->field('id,name')->select();
+                $this->display();
+            }else {
+                $this->error('您还没有创建企业基本信息，将跳转到企业基本信息添加页', '/Cominfo/Index/comInfoAdd');
+            }
+        } else {
+            /**
+             * 没有session，说明根本没有登录，让他去登录页
+             */
+            $this->error('您还没有登录，无法访问该网页！', '/Company/Index/login');
+        }
+    }
+
+    public function getFunction($industry_id)
+    {
+        /**
+         * ajax请求传过来的行业id,,为职位表的外键
+         */
+        $industry_id = I('post.industry_id');
+        /**
+         * 获取职位信息
+         */
+        $function = M('function');
+        $function_list = $function->where(['industry_id' => $industry_id])->field('id,name')->order('id')->select();
+        /**
+         * 转换成json格式返回
+         */
+        $this->ajaxReturn($function_list);
+    }
+
+    /**
+     * 创建一个职位模板
+     */
+    public function createPost()
+    {
+        $user_id = $_SESSION['sess_wcl']['company_id'];
+        if ($user_id) {
+            /**
+             * 到编辑页面的主页面
+             */
+            $this->display();
+        } else {
+            /**
+             * 没有session，说明根本没有登录，让他去登录页
+             */
+            $this->error('您还没有登录，不能创建简历模板', '/Company/Index/login');
+        }
+    }
+
+    public function PostSave()
+    {
+        $post = D("post"); // 实例化User对象
+        if (!$post->create()) {
+            // 如果创建失败 表示验证没有通过 输出错误提示信息
+            $this->error($post->getError());
+        } else {
+            // 验证通过 可以进行其他数据操作
+            $result = $post->add();
+            if ($result) {
+                $this->success('基本信息保存成功', '/Post/Index/index');
+            } else {
+                $this->error('写入错误');
+            }
+        }
+    }
+
+    /**
+     * 修改职位发布信息
+     */
+    public function PostInput()
+    {
+        $id=I('post_id');
+        if ($id) {
+            /**
+             * 取companyinfo_id
+             */
+            $post = M('post');
+
+            $post_list = $post->find($id);
+
+            if( $post_list) {
+                /**
+                 * 行业职位
+                 */
+                $industry = M('industry');
+                $this->indsutry_list = $industry->field('id,name')->select();
+                $function = M('function');
+                $this->function_list = $function->where(['id' => $post_list['function_id']])->field('id,name')->select();
+
+                /**
+                 * 薪水
+                 */
+                $salary = M('salary');
+                $this->salary_list = $salary->field('id,cash')->select();
+                /**
+                 * 工作年限列表
+                 */
+                $worktime = M('worktime');
+                $this->worktime_list = $worktime->field('id,name')->select();
+
+                $this->post_list=$post_list;
+                $this->display();
+            }else {
+                $this->error('您还没有创建企业基本信息，将跳转到企业基本信息添加页', '/Cominfo/Index/comInfoAdd');
+            }
+        } else {
+            /**
+             * 没有session，说明根本没有登录，让他去登录页
+             */
+            $this->error('您还没有登录，无法访问该网页！', '/Company/Index/login');
+        }
+
+    }
+    /**
+     * 保存修改的简历
+     */
+    public function postInputSave()
+    {
+        $id=I('post_id');
+        if($id) {
+            $post=D('post');
+            if (!$post->create()) {
+                // 如果创建失败 表示验证没有通过 输出错误提示信息
+                $this->error($post->getError());
+            } else {
+                // 验证通过 可以进行其他数据操作
+                $result = $post->save();
+                if ($result) {
+                    $this->success('基本信息更新成功', '/Post/Index/postInput');
+                } else {
+                    $this->error('修改错误');
+                }
+            }
+
+        } else {
+            $this->error('无法访问该网页','/Post/index/postInput');
+        }
+    }
+    /**
+     * 删除职位发布信息
+     */
+
+    public function PostDelete()
+    {
+        $id=I('post_id');
+        if($id) {
+            $post = M('post');
+            $post->delete($id);
+            $this->success('删除成功', '/Post/index/index');
+        } else {
+            $this->error('要删除的简历不存在,请先创建简历','/Post/index/postAdd');
+        }
+    }
+
 }

@@ -318,4 +318,11 @@ class IndexController extends Controller
         $this->redirect('Home/index/index', '', 2, '页面跳转中...');
     }
 
+    /**
+     * 职位预览
+     */
+    public function showpost()
+    {
+        $this->display();
+    }
 }

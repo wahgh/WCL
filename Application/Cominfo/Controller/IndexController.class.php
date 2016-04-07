@@ -8,6 +8,7 @@ class IndexController extends Controller
 {
     public function index()
     {
+        $user_id = $_SESSION['sess_wcl']['company_id'];
         if(isset($_SESSION['sess_wcl']['company_auth'])&&$_SESSION['sess_wcl']['company_auth']) {
             /**
              * 获取行业信息
@@ -21,14 +22,30 @@ class IndexController extends Controller
             $degree = M('degree');
             $this->degree_list = $degree->field('id,name')->order('id')->select();
             $this->display();
-
+            if ($user_id) {
+                /**
+                 * 取companyinfo_id
+                 */
+                $company = M('Company');
+                $cominfo = $company
+                    ->where(['wcl_cominfo.companyuser_id' => $user_id])
+                    ->join('left join wcl_cominfo on wcl_company.id=wcl_cominfo.companyuser_id')
+                    ->select();
+                $post = M('post');
+                $this->post_list= $post
+                    ->where(['wcl_post.companyinfo_id' =>$cominfo[0]['id']])
+                    ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
+                    ->field('wcl_post.id,wcl_post.created_at,wcl_function.name as function_name')
+                    ->select();
+                var_dump($this->post_list);
+            }
+            $this->display();
         }else {
             /**
              * 没有session，说明根本没有登录，让他去登录页
              */
             $this->error('您还没有登录，无法访问该网页！', '/Company/Index/login');
         }
-
 
     }
 
@@ -117,6 +134,33 @@ class IndexController extends Controller
                     $this->error('写入错误');
                 }
             }
+        }
+    }
+
+    /**
+     * 对职位进行操作前预览
+     */
+    public function editPost()
+    {
+        $user_id = $_SESSION['sess_wcl']['company_id'];
+        if ($user_id) {
+            /**
+             * 取companyinfo_id
+             */
+            $company = M('Company');
+            $cominfo = $company
+                ->where(['wcl_cominfo.companyuser_id' => $user_id])
+                ->join('left join wcl_cominfo on wcl_company.id=wcl_cominfo.companyuser_id')
+                ->select();
+            $post = M('post');
+            $this->post_list= $post
+                ->where(['wcl_post.companyinfo_id' =>$cominfo[0]['id']])
+                ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
+                ->join('left join wcl_salary on wcl_post.salary_id=wcl_salary.id')
+                ->join('left join wcl_worktime on wcl_post.worktime_id=wcl_worktime.id')
+                ->field('wcl_post.id,wcl_post.created_at,wcl_function.name as function_name,wcl_salary.cash as salary_cash,wcl_worktime.name as worktime_name')
+                ->select();
+            $this->display();
         }
     }
 }
