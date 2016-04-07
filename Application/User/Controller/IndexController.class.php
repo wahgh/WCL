@@ -126,11 +126,98 @@ class IndexController extends Controller
 
     }
 
+    /**
+     * 登出
+     */
     public function logout()
     {
         if (isset($_SESSION['sess_wcl']['is_auth'])) {
             unset($_SESSION['sess_wcl']);
         }
         $this->redirect('Home/index/index', '', 2, '页面跳转中...');
+    }
+
+    /**
+     * 企业职位搜索
+     */
+    public function searchPost()
+    {
+        $condition = [];
+        /**
+         * 企业名称
+         */
+        $name = I('get.companyname');
+        /**
+         * 行业id
+         */
+        $industry_id = I('get.industry_id');
+        /**
+         * 职位id
+         */
+        $function_id = I('get.function_id');
+        /**
+         * 企业所在地省
+         */
+        $province_id = I('get.province_id');
+        /**
+         * 企业所在地市
+         */
+        $city_id = I('get.city_id');
+
+        if ($name || $industry_id || $function_id || $province_id || $city_id) {
+            $company = M('company');
+            /**
+             * 获取搜索职位信息
+             */
+            $condition = [
+                'wcl_cominfo.name' => ['like', "%${name}%"],
+                'wcl_cominfo.industry_id' => ['eq', $industry_id],
+                'wcl_post.function_id' => ['eq', $function_id],
+                'wcl_cominfo.province_id' => ['eq', $province_id],
+                'wcl_cominfo.city_id' => ['eq', $city_id],
+                '_logic' => 'OR'
+            ];
+            $this->post_list = $company
+                ->where($condition)
+                ->join('left join wcl_cominfo on wcl_company.id=wcl_cominfo.companyuser_id')
+                ->join('left join wcl_post on wcl_cominfo.id=wcl_post.companyinfo_id')
+                ->join('left join wcl_province on wcl_cominfo.province_id=wcl_province.id')
+                ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
+                ->join('left join wcl_city on wcl_cominfo.city_id=wcl_city.id')
+                ->field('wcl_function.name as function_name,wcl_cominfo.name as cominfo_name
+        ,wcl_province.name as province_name,wcl_city.name as city_name,wcl_post.updated_at,wcl_post.id')
+                ->select();
+            $this->display();
+        } else {
+            $this->error('至少填写一项才能搜索！');
+        }
+    }
+
+    public function postShow()
+    {
+        $post_id = I('get.post_id');
+        $this->assign('post_id', $post_id);
+        $post = M('post');
+        /**
+         * 获取所选企业信息
+         */
+        $cominfo = M('cominfo');
+        $company_list = $cominfo
+            ->where("wcl_post.id=${post_id}")
+            ->join('left join wcl_post on wcl_cominfo.id=wcl_post.companyinfo_id')
+            ->select();
+        /**
+         * 获取相应职位信息
+         */
+        $this->post_list = $post
+            ->where("wcl_post.id=${post_id}")
+            ->join('left join wcl_salary on wcl_post.salary_id=wcl_salary.id')
+            ->join('left join wcl_worktime on wcl_post.worktime_id=wcl_worktime.id')
+            ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
+            ->field('wcl_post.peoplenumber,wcl_post.birthday,wcl_post.contact
+            ,wcl_post.mobile,wcl_post.netaddress,wcl_post.context,wcl_post.house,wcl_salary.cash,
+            wcl_worktime.name,wcl_function.name')
+            ->select();
+        $this->display();
     }
 }

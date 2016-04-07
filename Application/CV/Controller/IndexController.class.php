@@ -11,6 +11,11 @@ class IndexController extends Controller
         $user_id = $_SESSION['sess_wcl']['id'];
         if($user_id) {
             /**
+             * 省份列表
+             */
+            $province = M('province');
+            $this->province_list = $province->field('id,name')->select();
+            /**
              * 获取行业信息
              */
             $industry = M('industry');

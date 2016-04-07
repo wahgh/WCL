@@ -36,7 +36,7 @@
                 <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                                             aria-haspopup="true" aria-expanded="false">求职管理</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">简历投递记录</a></li>
+                        <li><a href="/UserPost/index/userPostShow">简历投递记录</a></li>
                         <li><a href="#">企业来信</a></li>
                         <li><a href="#">回收站</a></li>
                     </ul>
@@ -76,7 +76,7 @@
             <div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
-                        <form class="form-horizontal" method="get" action="/User/index/login"
+                        <form class="form-horizontal" method="get" action="/User/index/searchPost"
                               onsubmit="return check_submit()">
                             <div class="form-group">
                                 <label class="control-label col-md-5" for="name">公司名:</label>
@@ -107,10 +107,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-5" for="address">地址:</label>
+                                <label class="control-label col-md-5">企业所在地省:</label>
 
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" name="address" id="address"/></div>
+                                    <select name="province_id" class="form-control" onchange="Change()" id="selprovince">
+                                        <option value="">请选择</option>
+                                        <foreach name="province_list" item="province">
+                                            <option value=" {$province.id}">{$province.name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5">企业所在地市:</label>
+
+                                <div class="col-md-7">
+                                    <select name="city_id" class="form-control" id="selcity">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-5"></label>
@@ -208,4 +223,26 @@
             return false;
         }
     }
+    /**
+     * 省市联动
+     */
+    $("#selprovince").change(function () {
+        /**
+         * 在ajax请求之前把市中的所有数据删掉，这样防止多次ajax请求造成，市中数据积累
+         */
+        $("option").remove(".city");
+        var selprovincevalue = $("#selprovince").val();
+        $.post("/CV/index/getCity", {
+            province_id: selprovincevalue
+        }, function (data) {
+            $.each(data, function (idx, item) {
+                var name = item.name;
+                var id = item.id;
+                /**
+                 * 拿到返回的值在市的下拉列表中添加option
+                 */
+                $("#selcity").append("<option class=" + "city" + " value=" + id + ">" + name + "</option>");
+            });
+        });
+    });
 </script>
