@@ -108,26 +108,24 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">行业:</label>
+                                <label class="control-label col-md-3" >行业:</label>
 
                                 <div class="col-md-7 col-md-offset-2">
-                                    <select name="industry_id" class="form-control">
+                                    <select name="industry_id" class="form-control" onchange="Change()"
+                                            id="selindustry">
                                         <option value="">请选择</option>
-                                        <foreach name="indsutry_list" item="industry">
-                                            <option value=" {$industry.id}">{$industry.name}</option>
+                                        <foreach name="indsutry_list" item="indsutry">
+                                            <option value=" {$indsutry.id}">{$indsutry.name}</option>
                                         </foreach>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">公司性质:</label>
+                                <label class="control-label col-md-3" >职位:</label>
 
                                 <div class="col-md-7 col-md-offset-2">
-                                    <select name="companytype_id" class="form-control">
+                                    <select name="function_id" class="form-control" id="selfunc">
                                         <option value="">请选择</option>
-                                        <foreach name="companytype_list" item="companytype">
-                                            <option value=" {$companytype.id}">{$companytype.name}</option>
-                                        </foreach>
                                     </select>
                                 </div>
                             </div>
@@ -236,6 +234,25 @@
                  * 拿到返回的值在市的下拉列表中添加option
                  */
                 $("#selcity").append("<option class=" + "city" + " value=" + id + ">" + name + "</option>");
+            });
+        });
+    });
+    $("#selindustry").change(function () {
+        /**
+         * 在ajax请求之前把职位中的所有数据删掉，这样防止多次ajax请求造成，职位中数据积累
+         */
+        $("option").remove(".func");
+        var seldustryvalue = $("#selindustry").val();
+        $.post("/Cominfo/index/getFunction", {
+            industry_id: seldustryvalue
+        }, function (data) {
+            $.each(data, function (idx, item) {
+                var name = item.name;
+                var id = item.id;
+                /**
+                 * 拿到返回的值在职位的下拉列表中添加option
+                 */
+                $("#selfunc").append("<option class=" + "func" + " value=" + id + ">" + name + "</option>");
             });
         });
     });

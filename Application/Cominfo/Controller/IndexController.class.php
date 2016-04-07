@@ -86,7 +86,7 @@ class IndexController extends Controller
                  * 获取行业信息
                  */
                 $industry = M('industry');
-                $indsutry_list = $industry->field('id,name')->order('id')->select();
+                $this->indsutry_list = $industry->field('id,name')->order('id')->select();
                 $this->display();
             }
 
@@ -97,7 +97,26 @@ class IndexController extends Controller
             $this->error('您还没有登录，无法访问该网页！', '/Company/Index/login');
         }
     }
-
+    /***
+     * ajax方式获取行业对应的职位
+     * @param $industry_id
+     */
+    public function getFunction($industry_id)
+    {
+        /**
+         * ajax请求传过来的行业id,,为职位表的外键
+         */
+        $industry_id = I('post.industry_id');
+        /**
+         * 获取职位信息
+         */
+        $function = M('function');
+        $function_list = $function->where(['industry_id' => $industry_id])->field('id,name')->order('id')->select();
+        /**
+         * 转换成json格式返回
+         */
+        $this->ajaxReturn($function_list);
+    }
     /**
      * 企业基本信息的保存
      */
