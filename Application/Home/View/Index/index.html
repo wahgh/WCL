@@ -4,11 +4,15 @@
             <div class="topBar">
                 <div class="contain">
                     <div class="leftArea">
-                        <a href="#" class="collection">欢迎来到职来职网</a>
-                        <div class="rightArea">
-                            <a href="#">&nbsp; [登陆]</a>
-                            <a href="#">&nbsp; [免费注册]</a>
-                        </div>
+                        <a href="#" class="collection"><h4>职来职往</h4></a>
+                    </div>
+                    <div class="rightArea">
+                        <eq name="mark" value="user">
+                            <span class="text-danger btn btn-danger"><a href="/User/index/logout">应聘者登出</a></span>
+                        </eq>
+                        <eq name="mark" value="company">
+                            <a href="/Company/index/logout" class="text-danger btn btn-danger">企业用户登出</a>
+                        </eq>
                     </div>
                 </div>
             </div>
@@ -20,16 +24,29 @@
                     <div class="rightBanner">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#">首页</a></li>
-                            <li><a href="#">找工作</a></li>
-                            <li><a href="#">专场</a></li>
+                            <eq name="mark" value="user">
+                                <li><a href="/CV/index/index">找工作专区</a></li>
+                            </eq>
+                            <eq name="mark" value="company">
+                                <li><a href="#">找人才专区</a></li>
+                            </eq>
+                            <eq name="mark" value="">
+                                <li><a href="/CV/index/index">找工作专区</a></li>
+                                <li><a href="">找人才专区</a></li>
+                            </eq>
                         </ul>
                     </div>
                     <div class="loginRight">
-                        <img src="/Public/images/qiuzhizhelogo.jpg"/>
-                        <span><a href="/User/index/login">求职者登录 </a></span>
-                        <img src="/Public/images/zhongjianshu.jpg"/>
-                        <img src="/Public/images/qiyelogo.jpg"/>
-                        <span><a href="/Company/index/login">企业登录</a></span>
+                        <!-- 采用eq进行比较-->
+                        <eq name="username" value="">
+                            <img src="/Public/images/qiuzhizhelogo.jpg"/>
+                            <span><a href="/User/index/login">求职者登录 </a></span>
+                            <img src="/Public/images/zhongjianshu.jpg"/>
+                            <img src="/Public/images/qiyelogo.jpg"/>
+                            <span><a href="/Company/index/login">企业登录</a></span>
+                            <else/>
+                            <span>{$username}用户，职来职往欢迎您！</span>
+                        </eq>
                     </div>
                 </div>
             </div>
