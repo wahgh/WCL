@@ -14,49 +14,11 @@
                 <li><a rel="nofollow" href="/Home/index/index">首页</a></li>
                 <li><a href="/Company/index/index">专区首页</a></li>
                 <li><a href="/Company/index/companyshow">我的职位</a></li>
-                <li><a href="">找人才</a></li>
+                <li><a href="/Cominfo/index/index">找人才</a></li>
                 <li><a href="">人才管理</a></li>
                 <li><a href="/Cominfo/index/editPost">更新职位</a></li>
                 <li><a href="/Company/index/logout">退出账户</a></li>
             </ul>
-        </div>
-        <div class="col-md-7 col-md-offset-1" id="body_right">
-
-            <div>
-                <div class="panel ">
-                    <div class="panel-body">
-                        <form class="form-horizontal" method="get" action="/Company/index/search"
-                              onsubmit="return check_submit()">
-                            <div class="form-group">
-                                <label class="control-label col-md-2">行业:</label>
-
-                                <div class="col-md-4">
-                                    <select name="industry_id" class="form-control" onchange="Change()"
-                                            id="selindustry">
-                                        <foreach name="user_list" item="user">
-                                            <option value="{$user.id}">{$user.name}</option>
-                                        </foreach>
-                                    </select>
-                                </div>
-                                <label class="control-label col-md-2">职位:</label>
-
-                                <div class="col-md-4">
-                                    <select name="function_id" class="form-control" id="selfunc">
-                                    </select>
-                                </div>
-
-                                <label class="control-label col-md-2" for="address">学历:</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="degree_id" id="address"/></div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-            <div></div>
         </div>
     </div>
     <div class="row col-md-10 col-md-offset-1" id="body">
