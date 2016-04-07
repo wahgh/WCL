@@ -14,6 +14,7 @@ class IndexController extends Controller
              */
             $industry = M('industry');
             $this->indsutry_list = $industry->field('id,name')->order('id')->select();
+            $this->display();
 
         }else {
             /**
