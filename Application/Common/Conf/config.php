@@ -14,8 +14,8 @@ return array(
     'URL_HTML_SUFFIX' => '', // URL伪静态后缀设置
     'TMPL_PARSE_STRING' => [
         'WEB_NAME' => '职来职往',
-        'IMAGE_PATH' => './Public/images/',
-        'UPLOAD_PATH' => './upload/images/'
+        'IMAGE_PATH' => '/Public/images/',
+        'UPLOAD_PATH' => '/upload/images/'
     ],
     // 显示页面Trace信息
     'SHOW_PAGE_TRACE' =>true,
