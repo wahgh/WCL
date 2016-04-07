@@ -68,8 +68,6 @@ class IndexController extends Controller
             ,wcl_post.mobile,wcl_post.netaddress,wcl_post.context,wcl_post.house,wcl_salary.cash,
             wcl_worktime.name,wcl_function.name')
                 ->select();
-            var_dump($post_list);
-            exit;
         } else {
             $this->error('您还没有登录，请先登录', '/User/index/login');
         }
