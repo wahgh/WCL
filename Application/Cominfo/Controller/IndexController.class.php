@@ -76,7 +76,9 @@ class IndexController extends Controller
                  * 获取公司性质表信息
                  */
                 $companytype = M('companytype');
+
                 $this->companytype_list = $companytype->field('id,name')->order('id')->select();
+
                 /**
                  * 省份列表
                  */
@@ -138,15 +140,15 @@ class IndexController extends Controller
             /**
              * 上传成功再对表单进行处理
              */
-            $cv = D("cominfo"); // 实例化User对象
-            if (!$cv->create()) {
+            $cominfo = D("cominfo"); // 实例化User对象
+            if (!$cominfo->create()) {
                 // 如果创建失败 表示验证没有通过 输出错误提示信息
-                $this->error($cv->getError());
+                $this->error($cominfo->getError());
             } else {
                 // 验证通过 可以进行其他数据操作
-                $cv->imagename = $info['photo']['name'];
-                $cv->imagepath = $info['photo']['savepath'] . $info['photo']['savename'];
-                $result = $cv->add();
+                $cominfo->imagename = $info['photo']['name'];
+                $cominfo->imagepath = $info['photo']['savepath'] . $info['photo']['savename'];
+                $result = $cominfo->add();
                 if ($result) {
                     $this->success('基本信息保存成功', '/Cominfo/index/create');
                 } else {
