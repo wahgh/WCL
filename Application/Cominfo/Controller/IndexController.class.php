@@ -9,13 +9,26 @@ class IndexController extends Controller
     public function index()
     {
         if(isset($_SESSION['sess_wcl']['company_auth'])&&$_SESSION['sess_wcl']['company_auth']) {
+            /**
+             * 获取行业信息
+             */
+            $industry = M('industry');
+            $this->indsutry_list = $industry->field('id,name')->order('id')->select();
+
+            /*
+             * 获取学历
+             */
+            $degree = M('degree');
+            $this->degree_list = $degree->field('id,name')->order('id')->select();
             $this->display();
+
         }else {
             /**
              * 没有session，说明根本没有登录，让他去登录页
              */
             $this->error('您还没有登录，无法访问该网页！', '/Company/Index/login');
         }
+
 
     }
 
@@ -56,7 +69,7 @@ class IndexController extends Controller
                  * 获取行业信息
                  */
                 $industry = M('industry');
-                $this->indsutry_list = $industry->field('id,name')->order('id')->select();
+                $indsutry_list = $industry->field('id,name')->order('id')->select();
                 $this->display();
             }
 
