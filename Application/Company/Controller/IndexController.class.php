@@ -111,7 +111,7 @@ class IndexController extends Controller
             $where_list = [
                 "wcl_job.sfunction_id" => ['eq', $function],
                 "wcl_cv.degree_id" => ['eq', $degree],
-                'wcl_function.industry_id'=>['eq',$industry],
+                'wcl_function.industry_id' => ['eq', $industry],
                 '_logic' => 'OR'
             ];
             $user = M('user');
@@ -134,7 +134,7 @@ class IndexController extends Controller
 
     public function cvshow()
     {
-       $id =  I('get.cv_id');
+        $id = I('get.cv_id');
 
         if ($id) {
             $cv = M('cv');
@@ -150,7 +150,7 @@ class IndexController extends Controller
                  */
                 $this->job_cv = $cv
                     ->where([' wcl_cv.id' => $id])
-                   // ->join('left join wcl_cv ON wcl_user.id = wcl_cv.id')
+                    // ->join('left join wcl_cv ON wcl_user.id = wcl_cv.id')
                     ->join('left join  wcl_job ON wcl_cv.id = wcl_job.cv_id')
                     ->join('left join  wcl_industry ON wcl_industry.id = wcl_job.sindustry_id')
                     ->join('left join  wcl_companytype ON wcl_companytype.id = wcl_job.scompanytype_id')
@@ -164,7 +164,7 @@ class IndexController extends Controller
                  */
                 $this->edu_cv = $cv
                     ->where(['wcl_cv.id' => $id])
-                   // ->join('wcl_cv ON wcl_user.id = wcl_cv.user_id')
+                    // ->join('wcl_cv ON wcl_user.id = wcl_cv.user_id')
                     ->join('wcl_edu ON wcl_cv.id = wcl_edu.cv_id')
                     ->join('wcl_degree ON wcl_degree.id = wcl_edu.degree_id')
                     ->field('wcl_edu.fromdate,wcl_edu.todate,wcl_edu.school,wcl_degree.name')
@@ -205,7 +205,6 @@ class IndexController extends Controller
             $this->error('您还没有登录，无法访问该网页', '/User/Index/login');
         }
     }
-
 
 
     /**

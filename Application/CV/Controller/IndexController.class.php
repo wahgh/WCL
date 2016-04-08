@@ -9,7 +9,56 @@ class IndexController extends Controller
     public function index()
     {
         $user_id = $_SESSION['sess_wcl']['id'];
-        if($user_id) {
+        if ($user_id) {
+            $user = M('user');
+            $industry_id = $user
+                ->where(['wcl_user.id' => $user_id])
+                ->join('left join wcl_cv on wcl_user.id=wcl_cv.user_id')
+                ->join('left join wcl_job on wcl_cv.id=wcl_job.cv_id')
+                ->join('left join wcl_industry on wcl_job.sindustry_id=wcl_industry.id')
+                ->field('wcl_industry.id')
+                ->select();
+            /**
+             * 用户所选行业id
+             */
+            $industry_id = $industry_id[0]['id'];
+            /**
+             *
+             */
+            /**
+             * 职位推荐信息处理
+             */
+            $cominfo = M('cominfo');
+            $this->cominfo_list = $cominfo
+                ->where(['wcl_cominfo.industry_id'])
+                ->join('left join wcl_province on wcl_province.id = wcl_cominfo.province_id')
+                ->join('left join wcl_city on wcl_city.id = wcl_cominfo.city_id')
+                ->join('left join wcl_industry on wcl_industry.id = wcl_cominfo.industry_id')
+                ->join('left join wcl_post on wcl_cominfo.id=wcl_post.companyinfo_id')
+                ->join('left join wcl_function on wcl_function.id = wcl_post.function_id')
+                ->field('wcl_cominfo.name as company_name,wcl_industry.name as industry_name,wcl_function.name
+                as function_name,wcl_post.id')
+                ->limit(4)
+                ->select();
+
+            /*
+             * 把职位的基本信息拿出来
+             */
+
+            $jianli = M('post');
+            $ok = $this->post_list = $jianli
+                //->where(['wcl_cominfo.companyuser_id' =>$user_id])
+                //->join('left join wcl_company_cv on wcl_company_cv.companyuser_id = wcl_company.id')
+                ->join('left join wcl_cominfo on wcl_post.companyinfo_id = wcl_cominfo.id')
+                //->join('left join wcl_cv on wcl_cv.id = wcl_company_cv.cv_id')
+                //->join('left join wcl_post on wcl_company.id = wcl_post.companyinfo_id')
+                ->join('left join wcl_salary on wcl_salary.id = wcl_post.salary_id')
+                ->join('left join wcl_worktime on wcl_worktime.id = wcl_post.worktime_id')
+                ->join('left join wcl_function on wcl_function.id = wcl_post.function_id')
+                ->join('left join wcl_industry on wcl_industry.id = wcl_function.industry_id')
+                ->field('wcl_post.peoplenumber,wcl_salary.cash,wcl_post.birthday,wcl_worktime.name as worktime_name,wcl_post.contact,wcl_post.mobile,wcl_post.netaddress,wcl_post.context,wcl_function.name as function_name,wcl_industry.name as industry_name')
+                ->select();
+
             /**
              * 省份列表
              */
@@ -29,7 +78,7 @@ class IndexController extends Controller
                 ->field('wcl_cv.realname,wcl_cv.id,wcl_cv.updated_at')
                 ->select();
             $this->display();
-        }else {
+        } else {
             /**
              * 没有session，说明根本没有登录，让他去登录页
              */
@@ -347,8 +396,8 @@ class IndexController extends Controller
 
     public function BasicEditSave()
     {
-        $id=I('post.id');
-        if($id) {
+        $id = I('post.id');
+        if ($id) {
             /**
              * 对上传文件进行处理
              */
@@ -381,7 +430,7 @@ class IndexController extends Controller
                     }
                 }
             }
-        }else {
+        } else {
             $this->error('无法访问该网页', '/User/Index/login');
         }
     }
