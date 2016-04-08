@@ -1,0 +1,159 @@
+<div class="container" id="container">
+    <div class="row col-md-6 col-md-offset-3" id="top">
+        <div class="col-md-3">
+            <img src="/Public/images/logo.png" title="企业logo">
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <a href="/Home/index/index" class="col-md-6 col-md-offset-4">
+                <img border="0" width="400" height="55" title="职来职往主页" src="http://img2.goodjobs.cn/files/53055_58.gif">
+            </a>
+        </div>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="nav">
+        <ul class="nav nav-pills nav-justified">
+            <li><a rel="nofollow" href="/Home/index/index">首页</a></li>
+            <li><a href="/Company/index/index">专区首页</a></li>
+            <li><a href="/Company/index/companyshow">我的职位</a></li>
+            <li><a href="/Cominfo/index/index">找人才</a></li>
+            <li><a href="">人才管理</a></li>
+            <li><a href="/Cominfo/index/editPost">更新职位</a></li>
+        </ul>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="body">
+        <div class="row">
+            <table class="table table-bordered table-condensed table-striped text-center">
+                <caption><h3>基本信息表</h3></caption>
+                <foreach name="basic_list" item="basic">
+                <h4>姓名: &nbsp;&nbsp;<span style="font-size: 25px;font-weight: bold">{$basic.realname}</span></h4>
+                <img src="/upload/images/companys/2016-04-08/570707ab47bc5.jpg"/>
+                </foreach>
+                <tr>
+                    <th>性别</th>
+                    <th>出生日期</th>
+                    <th>邮箱</th>
+                    <th>手机</th>
+                    <th>工作年限</th>
+                    <th>学校</th>
+                    <th>最高学历</th>
+                    <th>语言</th>
+                    <th>级别</th>
+                    <th>民族</th>
+                    <th>所在省</th>
+                    <th>所在市</th>
+                    <th>个人评价</th>
+                </tr>
+                <foreach name="basic_list" item="basic">
+                    <tr>
+                        <if condition="$basic.gender eq 'F'">
+                            <td>男</td>
+                            <else/>
+                            <td>女</td>
+                        </if>
+                        <td>{$basic.birthday}</td>
+                        <td>{$basic.email}</td>
+                        <td>{$basic.mobile}</td>
+                        <td>{$basic.worktime_name}</td>
+                        <td>{$basic.school}</td>
+                        <td>{$basic.degree_name}</td>
+                        <td>{$basic.language}</td>
+                        <td>{$basic.level_name}</td>
+                        <td>{$basic.nation_name}</td>
+                        <td>{$basic.province_name}</td>
+                        <td>{$basic.city_name}</td>
+                        <td>{$basic.evaluation}</td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+        <div class="row">
+            <table class="table table-bordered table-condensed table-striped text-center">
+                <caption><h3>求职意向</h3></caption>
+                <tr>
+                    <th>行业</th>
+                    <th>公司性质</th>
+                    <th>职位</th>
+                    <th>是否提供住房</th>
+                    <th>薪水</th>
+                </tr>
+                <foreach name="job_list" item="job">
+                    <tr>
+                        <td>{$job.industry_name}</td>
+                        <td>{$job.companytype_name}</td>
+                        <td>{$job.function_name}</td>
+                        <if condition="$job.shouse eq 'y'">
+                            <td>是</td>
+                            <else/>
+                            <td>否</td>
+                        </if>
+                        <td>{$job.salary_cash}</td>
+
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+        <div class="row">
+            <table class="table table-bordered table-condensed table-striped text-center">
+                <caption><h3>教育信息</h3></caption>
+                <tr>
+                    <th>开始日期</th>
+                    <th>结束日期</th>
+                    <th>学校</th>
+                    <th>获得学位</th>
+                </tr>
+                <foreach name="edu_list" item="edu">
+                    <tr>
+                        <td>{$edu.fromdate}</td>
+                        <td>{$edu.todate}</td>
+                        <td>{$edu.school}</td>
+                        <td>{$edu.name}</td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="bottom">
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>服务热线</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li>总机：0551-63400800</li>
+                        <li>企业：0551-65666555</li>
+                        <li>个人：0551-65666558</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>关于我们</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li><a href="http://www.goodjobs.cn/about/index.html">公司简介</a></li>
+                        <li><a href="http://www.goodjobs.cn/about/copyright.html">声明顾问</a></li>
+                        <li><a href="http://www.goodjobs.cn/sitemap.html">站点地图</a></li>
+                        <li><a href="http://feedback.goodjobs.cn/">意见反馈</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul class="list-unstyled">
+                <li>产品</li>
+                <li>
+                    <ul class="list-unstyled">
+                        <li><a href="/Home/index/index">企业招聘</a></li>
+                        <li><a href="http://learning.goodjobs.cn/">个人培训</a></li>
+                        <li><a href="http://www.goodjobs.cn/about/price.html">服务报价</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <ul>
+                <strong>关注微信</strong>
+                <img src="http://www.goodjobs.cn/images/wx.png" title="微信"/>
+            </ul>
+        </div>
+    </div>
+</div>
