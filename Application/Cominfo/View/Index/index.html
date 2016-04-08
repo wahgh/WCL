@@ -120,7 +120,20 @@
                 </div>
             </div>
             <h4>简历推荐</h4>
-
+            <table class="table table-bordered table-condensed table-striped text-center">
+                <tr>
+                    <th>姓名</th>
+                    <th>职位</th>
+                    <th>更新时间</th>
+                </tr>
+                <foreach name="job_show" item="job">
+                    <tr>
+                        <td><a href="/Company/index/cvshow/cv_id/{$job.id}">{$job.realname}</a></td>
+                        <td><a href="/Company/index/cvshow/cv_id/{$job.id}">{$job.industry_name}</a></td>
+                        <td>{$job.updated_at}</td>
+                    </tr>
+                </foreach>
+            </table>
             <div></div>
         </div>
     </div>
