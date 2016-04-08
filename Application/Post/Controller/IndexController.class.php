@@ -7,14 +7,31 @@ class IndexController extends Controller
 {
     public function index()
     {
-
+        $user_id = $_SESSION['sess_wcl']['company_id'];
         if(isset($_SESSION['sess_wcl']['company_auth'])&&$_SESSION['sess_wcl']['company_auth']) {
             /**
              * 获取行业信息
              */
             $industry = M('industry');
             $this->indsutry_list = $industry->field('id,name')->order('id')->select();
-            $this->display();
+            if ($user_id) {
+                /**
+                 * 取companyinfo_id
+                 */
+                $company = M('Company');
+                $cominfo = $company
+                    ->where(['wcl_cominfo.companyuser_id' => $user_id])
+                    ->join('left join wcl_cominfo on wcl_company.id=wcl_cominfo.companyuser_id')
+                    ->select();
+                $post = M('post');
+                $this->post_list= $post
+                    ->where(['wcl_post.companyinfo_id' =>$cominfo[0]['id']])
+                    ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
+                    ->field('wcl_post.id,wcl_post.updated_at,wcl_function.name as function_name')
+                    ->select();
+
+                $this->display();
+            }
 
         }else {
             /**
