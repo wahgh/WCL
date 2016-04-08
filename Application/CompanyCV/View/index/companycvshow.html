@@ -11,38 +11,37 @@
     </div>
     <div class="row col-md-8 col-md-offset-2" id="nav">
         <ul class="nav nav-pills nav-justified">
-            <li><a href="/Home/Index/index">首页</a></li>
-            <li><a href="/CV/Index/index">专区首页</a></li>
-            <li><a href="/CV/Index/showcv">我的简历</a></li>
-            <li><a href="/CV/Index/editcv">更新简历</a></li>
+            <li><a rel="nofollow" href="/Home/index/index">首页</a></li>
+            <li><a href="/Company/index/index">专区首页</a></li>
+            <li><a href="/Company/index/companyshow">我的职位</a></li>
+            <li><a href="/Cominfo/index/index">找人才</a></li>
+            <li><a href="">人才管理</a></li>
+            <li><a href="/Cominfo/index/editPost">更新职位</a></li>
         </ul>
     </div>
     <div class="row col-md-8 col-md-offset-2" id="body">
-        <div class="row"></div>
         <div class="row">
+            <h2>关注的简历</h2>
+            <div class="col-md-6">
+                <h4>我一共关注&nbsp;<span style="font-size: 20px; color: red;font-weight: bold">{$count}份&nbsp;</span>简历</h4>
+            </div>
             <table class="table table-bordered table-condensed table-striped text-center">
-                <caption><h3>搜索职位信息</h3></caption>
+                <caption><h3>基本信息表</h3></caption>
                 <tr>
-                    <th>职位名称</th>
-                    <th>公司名称</th>
-                    <th>工作地省</th>
-                    <th>工作地市</th>
+                    <th>姓名</th>
+                    <th>最高学历</th>
                     <th>更新时间</th>
                 </tr>
-                <foreach name="post_list" item="post">
+                <foreach name="cv_list" item="cv">
                     <tr>
-                        <td><a href="/User/index/postShow/post_id/{$post.id}">{$post.function_name}</a></td>
-                        <td><a href="/User/index/postShow/post_id/{$post.id}">{$post.cominfo_name}</a></td>
-                        <td>{$post.province_name}</td>
-                        <td>{$post.city_name}</td>
-                        <td>{$post.updated_at}</td>
+                        <td><a href="/CompanyCV/index/detailcv/cv_id/{$cv.id}">{$cv.realname}</a></td>
+                        <td>{$cv.degree_name}</td>
+                        <td>{$cv.updated_at}</td>
                     </tr>
                 </foreach>
             </table>
         </div>
-        <div class="row"></div>
     </div>
-    <div class="row col-md-8 col-md-offset-2"></div>
     <div class="row col-md-8 col-md-offset-2" id="bottom">
         <div class="col-md-3">
             <ul class="list-unstyled">

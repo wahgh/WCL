@@ -11,18 +11,23 @@
     </div>
     <div class="row col-md-8 col-md-offset-2" id="nav">
         <ul class="nav nav-pills nav-justified">
-            <li><a href="/Home/Index/index">首页</a></li>
-            <li><a href="/CV/Index/index">专区首页</a></li>
-            <li><a href="/CV/Index/showcv">我的简历</a></li>
-            <li><a href="/CV/Index/editcv">更新简历</a></li>
+            <li><a rel="nofollow" href="/Home/index/index">首页</a></li>
+            <li><a href="/Company/index/index">专区首页</a></li>
+            <li><a href="/Company/index/companyshow">我的职位</a></li>
+            <li><a href="/Cominfo/index/index">找人才</a></li>
+            <li><a href="">人才管理</a></li>
+            <li><a href="/Cominfo/index/editPost">更新职位</a></li>
         </ul>
     </div>
     <div class="row col-md-8 col-md-offset-2" id="body">
         <div class="row">
             <table class="table table-bordered table-condensed table-striped text-center">
                 <caption><h3>基本信息表</h3></caption>
+                <foreach name="basic_list" item="basic">
+                <h4>姓名: &nbsp;&nbsp;<span style="font-size: 25px;font-weight: bold">{$basic.realname}</span></h4>
+                <img src="/upload/images/companys/2016-04-08/570707ab47bc5.jpg"/>
+                </foreach>
                 <tr>
-                    <th>姓名</th>
                     <th>性别</th>
                     <th>出生日期</th>
                     <th>邮箱</th>
@@ -39,7 +44,6 @@
                 </tr>
                 <foreach name="basic_list" item="basic">
                     <tr>
-                        <td>{$basic.realname}</td>
                         <if condition="$basic.gender eq 'F'">
                             <td>男</td>
                             <else/>
@@ -107,7 +111,6 @@
             </table>
         </div>
     </div>
-    <div class="row col-md-8 col-md-offset-2"></div>
     <div class="row col-md-8 col-md-offset-2" id="bottom">
         <div class="col-md-3">
             <ul class="list-unstyled">

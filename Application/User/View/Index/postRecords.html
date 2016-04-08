@@ -19,74 +19,26 @@
     </div>
     <div class="row col-md-8 col-md-offset-2" id="body">
         <div class="row">
+            <h4 class="text-danger">总投递数：{$records_sum}</h4>
+        </div>
+   <div class="row"></div>
+        <div class="row">
+            <table class="table table-bordered table-condensed table-striped text-center">
+                <caption><h3>职位投递信息</h3></caption>
+                <tr>
+                    <td>企业名称</td>
+                    <td>应聘职位</td>
+                    <td>投递时间</td>
 
-        </div>
-        <div class="row">
-            <table class="table table-bordered table-condensed table-striped text-center">
-                <caption><h3>企业信息</h3></caption>
-                <tr>
-                    <th>企业名称</th>
-                    <th>行业</th>
-                    <th>公司性质</th>
-                    <th>注册资金</th>
-                    <th>企业人数</th>
-                    <th>企业执业证</th>
-                    <th>企业所在地省</th>
-                    <th>企业所在地市</th>
-                    <th>地址</th>
-                    <th>邮编</th>
-                    <th>更新时间</th>
-                </tr>
-                <foreach name="company_list" item="company">
-                    <tr>
-                        <td>{$company.companyname}</td>
-                        <td>{$company.industry_name}</td>
-                        <td>{$company.companytype_name}</td>
-                        <td>{$company.registercash}</td>
-                        <td>{$company.people}</td>
-                        <td>{$company.cetificate}</td>
-                        <td>{$company.province_name}</td>
-                        <td>{$company.city_name}</td>
-                        <td>{$company.address}</td>
-                        <td>{$company.zidcode}</td>
-                        <td>{$company.updated_at}</td>
-                    </tr>
-                </foreach>
-            </table>
-        </div>
-        <div class="row">
-            <table class="table table-bordered table-condensed table-striped text-center">
-                <caption><h3>职位信息</h3></caption>
-                <tr>
-                    <td>职位</td>
-                    <th>招聘人数</th>
-                    <th>年龄</th>
-                    <th>月薪</th>
-                    <th>是否提供住房</th>
-                    <th>联系人</th>
-                    <th>联系电话</th>
-                    <th>企业网址</th>
                 </tr>
                 <foreach name="post_list" item="post">
                     <tr>
-                        <td>{$post.name}</td>
-                        <td>{$post.peoplenumber}</td>
-                        <td>{$post.birthday}</td>
-                        <td>{$post.cash}</td>
-                        <eq name="$post.house" value="y">
-                            <td>提供住房</td>
-                            <else/>
-                            <td>不提供住房</td>
-                        </eq>
-                        <td>{$post.contact}</td>
-                        <td>{$post.mobile}</td>
-                        <td><a href="{$post.netaddress}">{$post.netaddress}</a></td>
+                        <td><a href="/User/index/postShow/post_id/{$post.id}">{$post.company_name}</a></td>
+                        <td>{$post.function_name}</td>
+                        <td>{$post.created_at}</td>
                     </tr>
                 </foreach>
             </table>
-        </div>
-        <div class="row">
-            <a href="/UserPost/index/userPostAdd/post_id/{$post_id}" class="btn btn-primary col-md-3 col-md-offset-7">投递简历</a>
         </div>
     </div>
     <div class="row col-md-8 col-md-offset-2"></div>
