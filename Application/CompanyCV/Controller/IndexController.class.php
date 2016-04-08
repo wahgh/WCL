@@ -54,10 +54,23 @@ class IndexController extends Controller
          */
         $companyuser_id = $_SESSION['sess_wcl']['company_id'];
         if($companyuser_id){
+            $id = I('get.cv_id');
                 $company_cv = M('company_cv');
-                $this->count = $company_cv->count('wcl_company_cv.id');
-                $cv = M('cv');
-                $this->cv_list=$cv->join('left join wcl_degree on wcl_cv.degree_id = wcl_degree.id')->field('wcl_cv.id,wcl_degree.name as degree_name,wcl_cv.realname,wcl_cv.updated_at')->select();
+            /**
+             * 获取该企业投递简历数
+             */
+            $company=M('company');
+                $this->count = $company
+                    ->where(['wcl_company.id'=>$companyuser_id])
+                    ->join('left join wcl_company_cv on wcl_company.id=wcl_company_cv.companyuser_id')
+                    ->count();
+            $this->cv_list = $company
+                ->where(['wcl_company.id'=>$companyuser_id])
+                ->join('left join wcl_company_cv on wcl_company.id=wcl_company_cv.companyuser_id')
+                ->join('left join wcl_cv on wcl_cv.id = wcl_company_cv.cv_id')
+                ->join('left join wcl_degree on wcl_cv.degree_id = wcl_degree.id')
+                ->field('wcl_cv.id,wcl_degree.name as degree_name,wcl_cv.realname,wcl_cv.updated_at')
+                ->select();
                 $this->display();
         }else{
             $this->error('你还没有登录，将进入企业登录页', '/Company/index/login');
