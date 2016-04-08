@@ -34,7 +34,7 @@ class IndexController extends Controller
                     ];
                    $is_success= $company_cv->data($result)->add();
                     if($is_success){
-                        $this->success("关注简历成功，预览关注的简历","/CompanyCV/index/companycvshow");
+                        $this->success("关注简历成功，预览关注的简历");
                     }
                 }
             }else{
@@ -54,16 +54,11 @@ class IndexController extends Controller
          */
         $companyuser_id = $_SESSION['sess_wcl']['company_id'];
         if($companyuser_id){
-            $id = I('get.cv_id');
-            if($id){
                 $company_cv = M('company_cv');
                 $this->count = $company_cv->count('wcl_company_cv.id');
                 $cv = M('cv');
-                $this->cv_list=$cv->where(['wcl_cv.id' => $id ])->join('left join wcl_degree on wcl_cv.degree_id = wcl_degree.id')->field('wcl_cv.id,wcl_degree.name as degree_name,wcl_cv.realname,wcl_cv.updated_at')->select();
+                $this->cv_list=$cv->join('left join wcl_degree on wcl_cv.degree_id = wcl_degree.id')->field('wcl_cv.id,wcl_degree.name as degree_name,wcl_cv.realname,wcl_cv.updated_at')->select();
                 $this->display();
-            }else{
-                $this->error('你还没有关注过该简历，请关注', '/Company/index/cvshow');
-            }
         }else{
             $this->error('你还没有登录，将进入企业登录页', '/Company/index/login');
         }
