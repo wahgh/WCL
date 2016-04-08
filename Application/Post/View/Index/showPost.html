@@ -1,0 +1,55 @@
+<div class="container" id="container">
+    <div class="row col-md-6 col-md-offset-3" id="top">
+        <div class="col-md-3">
+            <img src="/Public/images/logo.png" title="企业logo">
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <a href="/Home/index/index" class="col-md-6 col-md-offset-4">
+                <img border="0" width="400" height="55" title="职来职往主页" src="http://img2.goodjobs.cn/files/53055_58.gif">
+            </a>
+        </div>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="nav">
+        <ul class="nav nav-pills nav-justified">
+            <li><a rel="nofollow" href="/Home/index/index">首页</a></li>
+            <li><a href="/Company/index/index">专区首页</a></li>
+            <li><a href="/Company/index/companyshow">我的职位</a></li>
+            <li><a href="/Cominfo/index/index">找人才</a></li>
+            <li><a href="">人才管理</a></li>
+            <li><a href="/Cominfo/index/editPost">更新职位</a></li>
+        </ul>
+    </div>
+    <div class="row col-md-8 col-md-offset-2" id="body">
+        <div class="row">
+            <table class="table table-bordered table-condensed table-striped text-center">
+                <caption><h3>已发布的招聘信息</h3></caption>
+                <tr>
+                    <th>职位名称</th>
+                    <th>招聘人数</th>
+                    <th>薪资</th>
+                    <th>年龄要求</th>
+                    <th>工作年限</th>
+                    <th>联系人</th>
+                    <th>联系电话</th>
+                    <th>公司网址</th>
+                    <th>招聘要求</th>
+                    <th>创建时间</th>
+                    <th colspan="2">操作</th>
+                </tr>
+                        <td>{$post_list[0].function_name}</td>
+                        <td>{$post_list[0].peoplenumber}</td>
+                        <td>{$post_list[0].salary_cash}</td>
+                        <td>{$basic.worktime_name}</td>
+                        <td>{$post_list[0].birthday}</td>
+                        <td>{$post_list[0].worktime_name}</td>
+                        <td>{$post_list[0].contact}</td>
+                        <td>{$post_list[0].mobile}</td>
+                        <td>{$post_list[0].netaddress}</td>
+                        <td>{$post_list[0].context}</td>
+                        <td>{$post_list[0].created_at}</td>
+                    </tr>
+                </foreach>
+                </table>
+            </div>
+        </div>
+    </div>

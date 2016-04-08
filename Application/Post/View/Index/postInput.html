@@ -50,7 +50,7 @@
             </ul>
         </div>
         <div class="col-md-7 col-md-offset-1" id="body_right">
-            <h4>发布职位必填信息</h4>
+            <h4>职位信息修改</h4>
 
             <div>
                 <div class="panel panel-primary">
@@ -61,34 +61,25 @@
                                 <label class="control-label col-md-3"></label>
 
                                 <div class="col-md-7 col-md-offset-2">
-                                    <input type="hidden" class="form-control" name="companyinfo_id" value="post_list.companyinfo_id"/>
+                                    <input type="hidden" class="form-control" name="id" value="{$id}"/>
+                                    <input type="hidden" class="form-control" name="companyinfo_id" value="{$post_list.companyinfo_id}"/>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3" >行业:</label>
 
-                                <div class="col-md-7 col-md-offset-2">
-                                    <select name="industry_id" class="form-control" onchange="Change()"
-                                            id="selindustry">
-                                        <option value="">请选择</option>
-                                        <foreach name="indsutry_list" item="indsutry">
-                                            <eq name="$indsutry_list[0].indsutry_id" value="$indsutry.id">
-                                                <option value="{$indsutry.id}" selected="selected">{$indsutry.name}
-                                                </option>
-                                                <else/>
-                                                <option value="{$indsutry.id}">{$indsutry.name}</option>
-                                            </eq>
-                                        </foreach>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3" >职位:</label>
 
                                 <div class="col-md-7 col-md-offset-2">
                                     <select name="function_id" class="form-control" id="selfunc">
                                         <option value="">请选择</option>
-                                        <option value="{$city_list[0].id}" selected="selected">{$city_list[0].name}
+                                        <foreach name="function_list" item="function">
+                                        <eq name="post_list.function_id" value="$function.id">
+                                            <option value="{$function.id}" selected="selected">{$function.name}
+                                            </option>
+                                            <else/>
+                                            <option value="{$function.id}">{$function.name}</option>
+                                        </eq>
+                                            </foreach>
                                     </select>
                                 </div>
                             </div>
@@ -109,7 +100,12 @@
                                         <select name="salary_id" class="form-control">
                                             <option value="">请选择</option>
                                             <foreach name="salary_list" item="salary">
-                                                <option value=" {$salary.id}">{$salary.cash}</option>
+                                                <eq name="post_list.salary_id" value="$salary.id">
+                                                    <option value="{$salary.id}" selected="selected">{$salary.cash}
+                                                    </option>
+                                                    <else/>
+                                                    <option value=" {$salary.id}">{$salary.cash}</option>
+                                                </eq>
                                             </foreach>
                                         </select>
                                     </div>
@@ -158,16 +154,15 @@
                                 <label class="control-label col-md-3">工作年限:</label>
 
                                 <div class="col-md-7 col-md-offset-2">
-                                    <select name="worktime_id" class="form-control" onchange="Change()"
-                                            id="selworktime">
+                                    <select name="worktime_id" class="form-control" id="selworktime">
                                         <option value="">请选择</option>
                                         <foreach name="worktime_list" item="worktime">
                                             <!-- 采用eq进行比较-->
-                                            <eq name="basic_list[0].worktime_id" value="$worktime.id">
-                                                <option value=" {$worktime.id}" selected="selected">{$worktime.name}
+                                            <eq name="post_list.worktime_id" value="$worktime.id">
+                                                <option value="{$worktime.id}" selected="selected">{$worktime.name}
                                                 </option>
                                                 <else/>
-                                                <option value=" {$worktime.id}">{$worktime.name}</option>
+                                                <option value="{$worktime.id}">{$worktime.name}</option>
                                             </eq>
                                         </foreach>
                                     </select>
@@ -182,13 +177,17 @@
 
                                         <eq name="post_list.house" id="houseY" value="Y">
                                             <label>
-                                                <input type="radio" name="house" id="houseY" value="Y" checked>
+                                                <input type="radio" name="house" value="Y" checked>
                                                 有
                                             </label>
                                             <else/>
                                             <label>
-                                                <input type="radio" name="house" id="houseN" value="N">
-                                                无
+                                                <input type="radio" name="house" id="houseY" value="Y" checked>
+                                                有
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="house" id="houseN" value="Y" checked>
+                                              无
                                             </label>
                                         </eq>
                                     </div>

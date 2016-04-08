@@ -145,24 +145,21 @@ class IndexController extends Controller
      */
     public function PostInput()
     {
-        $id=I('post_id');
-        if ($id) {
+        $this->id=I('post_id');
+        if ($this->id) {
             /**
              * 取companyinfo_id
              */
             $post = M('post');
 
-            $post_list = $post->find($id);
+            $post_list = $post->find($this->id);
 
             if( $post_list) {
                 /**
-                 * 行业职位
+                 * 职位
                  */
-                $industry = M('industry');
-                $this->indsutry_list = $industry->field('id,name')->select();
                 $function = M('function');
-                $this->function_list = $function->where(['id' => $post_list['function_id']])->field('id,name')->select();
-
+                $this->function_list = $function->field('id,name')->select();
                 /**
                  * 薪水
                  */
@@ -192,25 +189,28 @@ class IndexController extends Controller
      */
     public function postInputSave()
     {
-        $id=I('post_id');
-        if($id) {
-            $post=D('post');
+//        $id=I('companyinfo_id');
+//        if($id) {
+            $post=M('post');
+//            var_dump($post);exit;
             if (!$post->create()) {
                 // 如果创建失败 表示验证没有通过 输出错误提示信息
                 $this->error($post->getError());
             } else {
                 // 验证通过 可以进行其他数据操作
+//                var_dump($_POST);exit;
                 $result = $post->save();
                 if ($result) {
-                    $this->success('基本信息更新成功', '/Post/Index/postInput');
+
+                    $this->success('基本信息更新成功', '/Company/index/companyshow');
                 } else {
                     $this->error('修改错误');
                 }
             }
 
-        } else {
-            $this->error('无法访问该网页','/Post/index/postInput');
-        }
+//        } else {
+//            $this->error('无法访问该网页','/Post/index/postInput');
+//        }
     }
     /**
      * 删除职位发布信息
@@ -228,4 +228,33 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * 职位预览
+     */
+    public function showPost()
+    {
+        $user_id = $_SESSION['sess_wcl']['company_id'];
+        if ($user_id) {
+            /**
+             * 通过company_id 查看该企业找到companyinfo_id
+             */
+            $company = M('Company');
+            $cominfo = $company
+                ->where(['wcl_cominfo.companyuser_id' => $user_id])
+                ->join('left join wcl_cominfo on wcl_company.id=wcl_cominfo.companyuser_id')
+                ->select();
+            $post = M('post');
+            $this->post_list= $post
+                ->where(['wcl_post.companyinfo_id' =>$cominfo[0]['id']])
+                ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
+                ->join('left join wcl_salary on wcl_post.salary_id=wcl_salary.id')
+                ->join('left join wcl_worktime on wcl_post.worktime_id=wcl_worktime.id')
+                ->field('wcl_post.id,wcl_post.created_at,wcl_function.name as function_name,
+                wcl_salary.cash as salary_cash,wcl_worktime.name as worktime_name,wcl_post.peoplenumber,
+                wcl_post.birthday,wcl_post.context,wcl_post.contact,wcl_post.mobile,wcl_post.netaddress')
+                ->select();
+        $this->display();
+        }
+
+    }
 }
