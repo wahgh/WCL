@@ -9,7 +9,24 @@ class IndexController extends Controller
     public function index()
     {
         $user_id = $_SESSION['sess_wcl']['company_id'];
-        if(isset($_SESSION['sess_wcl']['company_auth'])&&$_SESSION['sess_wcl']['company_auth']) {
+        if (isset($_SESSION['sess_wcl']['company_auth']) && $_SESSION['sess_wcl']['company_auth']) {
+            /*
+             * 获取：简历推荐
+             */
+
+            $cominfo = M('cominfo');
+            $industryinfo = $cominfo->where(['companyuser_id' => $user_id])->field('industry_id')->select();
+            $industryinfo_id = $industryinfo[0]['industry_id'];
+            $user = M('user');
+            $cv = M('cv');
+            $job = M('job');
+            $this->job_show = $job
+                ->where(['wcl_job.sindustry_id' => $industryinfo_id])
+                ->join('left join wcl_cv on wcl_job.cv_id = wcl_cv.id')
+                ->join('left join wcl_industry ON wcl_industry.id = wcl_job.sindustry_id')
+                ->field('wcl_cv.id,wcl_industry.name as industry_name,wcl_cv.realname,wcl_cv.updated_at')
+                ->limit(4)
+                ->select();
             /**
              * 获取行业信息
              */
@@ -32,8 +49,8 @@ class IndexController extends Controller
                     ->join('left join wcl_cominfo on wcl_company.id=wcl_cominfo.companyuser_id')
                     ->select();
                 $post = M('post');
-                $this->post_list= $post
-                    ->where(['wcl_post.companyinfo_id' =>$cominfo[0]['id']])
+                $this->post_list = $post
+                    ->where(['wcl_post.companyinfo_id' => $cominfo[0]['id']])
                     ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
                     ->field('wcl_post.id,wcl_post.updated_at,wcl_function.name as function_name')
                     ->select();
@@ -41,7 +58,7 @@ class IndexController extends Controller
                 $this->display();
             }
 
-        }else {
+        } else {
             /**
              * 没有session，说明根本没有登录，让他去登录页
              */
@@ -100,6 +117,7 @@ class IndexController extends Controller
             $this->error('您还没有登录，无法访问该网页！', '/Company/Index/login');
         }
     }
+
     /***
      * ajax方式获取行业对应的职位
      * @param $industry_id
@@ -120,6 +138,7 @@ class IndexController extends Controller
          */
         $this->ajaxReturn($function_list);
     }
+
     /**
      * 企业基本信息的保存
      */
@@ -175,8 +194,8 @@ class IndexController extends Controller
                 ->join('left join wcl_cominfo on wcl_company.id=wcl_cominfo.companyuser_id')
                 ->select();
             $post = M('post');
-            $this->post_list= $post
-                ->where(['wcl_post.companyinfo_id' =>$cominfo[0]['id']])
+            $this->post_list = $post
+                ->where(['wcl_post.companyinfo_id' => $cominfo[0]['id']])
                 ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
                 ->join('left join wcl_salary on wcl_post.salary_id=wcl_salary.id')
                 ->join('left join wcl_worktime on wcl_post.worktime_id=wcl_worktime.id')
