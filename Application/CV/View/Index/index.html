@@ -134,8 +134,22 @@
                 </div>
             </div>
             <h4>职位推荐</h4>
-
-            <div></div>
+            <div>
+                <table class="table table-bordered table-condensed table-striped text-center">
+                    <tr>
+                        <th>职位</th>
+                        <th>企业名称</th>
+                        <th>行业</th>
+                    </tr>
+                    <foreach name="cominfo_list" item="cominfo">
+                        <tr>
+                            <td><a href="/User/index/postShow/post_id/{$cominfo.id}">{$cominfo.function_name}</a></td>
+                            <td><a href="/User/index/postShow/post_id/{$cominfo.id}">{$cominfo.company_name}</a></td>
+                            <td>{$cominfo.industry_name}</td>
+                        </tr>
+                    </foreach>
+                </table>
+            </div>
         </div>
     </div>
     <div class="row col-md-8 col-md-offset-2"></div>
