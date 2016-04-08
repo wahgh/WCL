@@ -2,7 +2,7 @@
     <div class="row">
         <div id="header">
             <div class="wrapper">
-                <a class="logo" href="h/">
+                <a class="logo">
                     <img width="229" height="43" alt="职来职往" src="/Public/images/logo.png">
                 </a>
                 <ul id="navheader" class="reset">
@@ -11,21 +11,9 @@
                     <li>
                         <a rel="nofollow" href="/Post/index/cvlist">简历</a>
                     </li>
-                    <li><a rel="nofollow" href="/Post/index/postM">职位</a></li>
+                    <li><a rel="nofollow" href="/Cominfo/index/index">职位</a></li>
                 </ul>
-                <dl class="collapsible_menu">
-                    <dt>
-                        <span>职来职往&nbsp;</span>
-                        <span class="red dn" id="noticeDot-1"></span>
-                        <i></i>
-                    </dt>
-                    <dd><a href="positions.html">我发布的职位</a></dd>
-                    <dd><a href="positions.html">我收到的简历</a></dd>
-                    <dd class="btm"><a href="myhome.html">我的公司主页</a></dd>
-                    <dd><a href="list.html">我要找工作</a></dd>
-                    <dd><a href="accountBind.html">帐号设置</a></dd>
-                    <dd class="logout"><a rel="nofollow" href="login.html">退出</a></dd>
-                </dl>
+                <div class="col-md-1 col-md-offset-2"> <a href="/Company/index/logout" class="text-danger btn btn-danger">企业用户登出</a></div>
             </div>
         </div>
     </div>
@@ -65,7 +53,7 @@
                 </div>
                 <div class="col-md-4">
                     <table class="table table-bordered table-info table-condensed table-striped text-center">
-                        <img src="UPLOAD_PATHcompanys/{$cominfo.imagepath}" title="公司的logo">
+                        <img src="UPLOAD_PATHcompanys/{$cominfo.imagepath}" title="公司的logo" width="100px" height="100px">
                     </table>
                 </div>
             </div>

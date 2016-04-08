@@ -11,13 +11,12 @@
     </div>
     <div class="row col-md-8 col-md-offset-2" id="nav">
         <ul class="nav nav-pills nav-justified">
+            <li><a rel="nofollow" href="/Home/index/index">首页</a></li>
             <li><a href="/Company/index/index">专区首页</a></li>
-            <li><a href="/Company/index/showpost">我的职位</a></li>
-            <li><a href="">找人才</a></li>
+            <li><a href="/Company/index/companyshow">我的职位</a></li>
+            <li><a href="/Cominfo/index/index">找人才</a></li>
             <li><a href="">人才管理</a></li>
-            <li><a href="">职业指导</a></li>
             <li><a href="/Cominfo/index/editPost">更新职位</a></li>
-            <li><a href="">交流中心</a></li>
         </ul>
     </div>
     <div class="row col-md-8 col-md-offset-2" id="body">
@@ -36,16 +35,13 @@
                                                             aria-haspopup="true" aria-expanded="false">招聘管理</a>
                     <ul class="dropdown-menu">
                         <li><a href="#">简历投递记录</a></li>
-                        <li><a href="#">简历投递</a></li>
-                        <li><a href="#">回收站</a></li>
+                        <li><a href="#">关注简历</a></li>
                     </ul>
                 </li>
                 <li role="separator" class="divider"></li>
                 <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                                             aria-haspopup="true" aria-expanded="false">个人中心</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">修改密码</a></li>
-                        <li><a href="#">在线帮助</a></li>
                         <li><a href="/Company/index/logout">退出账户</a></li>
                     </ul>
                 </li>
@@ -60,10 +56,10 @@
                         <th>更新时间</th>
                         <th colspan="2">相关操作</th>
                     </tr>
-                    <foreach name="basic_list" item="basic">
+                    <foreach name="post_list" item="post">
                         <tr>
-                            <td>{$basic.realname}</td>
-                            <td>{$basic.updated_at}</td>
+                            <td>{$post.function_name}</td>
+                            <td>{$post.updated_at}</td>
                             <td><a href="/CV/Index/editcv">编辑</a></td>
                             <td><a href="/CV/Index/showcv">预览</a></td>
                         </tr>

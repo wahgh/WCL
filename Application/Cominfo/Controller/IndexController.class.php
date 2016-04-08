@@ -35,8 +35,9 @@ class IndexController extends Controller
                 $this->post_list= $post
                     ->where(['wcl_post.companyinfo_id' =>$cominfo[0]['id']])
                     ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
-                    ->field('wcl_post.id,wcl_post.created_at,wcl_function.name as function_name')
+                    ->field('wcl_post.id,wcl_post.updated_at,wcl_function.name as function_name')
                     ->select();
+
                 $this->display();
             }
 
