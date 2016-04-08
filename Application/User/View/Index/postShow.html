@@ -26,24 +26,31 @@
             <table class="table table-bordered table-condensed table-striped text-center">
                 <caption><h3>企业信息</h3></caption>
                 <tr>
+                    <th>企业名称</th>
                     <th>行业</th>
                     <th>公司性质</th>
-                    <th>职位</th>
-                    <th>是否提供住房</th>
-                    <th>薪水</th>
+                    <th>注册资金</th>
+                    <th>企业人数</th>
+                    <th>企业执业证</th>
+                    <th>企业所在地省</th>
+                    <th>企业所在地市</th>
+                    <th>地址</th>
+                    <th>邮编</th>
+                    <th>更新时间</th>
                 </tr>
-                <foreach name="post_list" item="post">
+                <foreach name="company_list" item="company">
                     <tr>
-                        <td>{$job.industry_name}</td>
-                        <td>{$job.companytype_name}</td>
-                        <td>{$job.function_name}</td>
-                        <if condition="$job.shouse eq 'y'">
-                            <td>是</td>
-                            <else/>
-                            <td>否</td>
-                        </if>
-                        <td>{$job.salary_cash}</td>
-
+                        <td>{$company.companyname}</td>
+                        <td>{$company.industry_name}</td>
+                        <td>{$company.companytype_name}</td>
+                        <td>{$company.registercash}</td>
+                        <td>{$company.people}</td>
+                        <td>{$company.cetificate}</td>
+                        <td>{$company.province_name}</td>
+                        <td>{$company.city_name}</td>
+                        <td>{$company.address}</td>
+                        <td>{$company.zidcode}</td>
+                        <td>{$company.updated_at}</td>
                     </tr>
                 </foreach>
             </table>
@@ -56,6 +63,7 @@
                     <th>招聘人数</th>
                     <th>年龄</th>
                     <th>月薪</th>
+                    <th>是否提供住房</th>
                     <th>联系人</th>
                     <th>联系电话</th>
                     <th>企业网址</th>
@@ -65,6 +73,7 @@
                         <td>{$post.name}</td>
                         <td>{$post.peoplenumber}</td>
                         <td>{$post.birthday}</td>
+                        <td>{$post.cash}</td>
                         <eq name="$post.house" value="y">
                             <td>提供住房</td>
                             <else/>

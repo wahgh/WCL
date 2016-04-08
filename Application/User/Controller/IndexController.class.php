@@ -142,7 +142,6 @@ class IndexController extends Controller
      */
     public function searchPost()
     {
-        $condition = [];
         /**
          * 企业名称
          */
@@ -201,10 +200,17 @@ class IndexController extends Controller
         /**
          * 获取所选企业信息
          */
-        $cominfo = M('cominfo');
-        $company_list = $cominfo
+        $post = M('post');
+        $this->company_list = $post
             ->where("wcl_post.id=${post_id}")
-            ->join('left join wcl_post on wcl_cominfo.id=wcl_post.companyinfo_id')
+            ->join('left join wcl_cominfo on wcl_post.companyinfo_id=wcl_cominfo.id')
+            ->join('left join wcl_companytype on wcl_cominfo.companytype_id=wcl_companytype.id')
+            ->join('left join wcl_province on wcl_cominfo.province_id=wcl_province.id')
+            ->join('left join wcl_city on wcl_cominfo.city_id=wcl_city.id')
+            ->join('left join wcl_industry on wcl_cominfo.industry_id=wcl_industry.id')
+            ->field('wcl_cominfo.registercash,wcl_cominfo.people,wcl_cominfo.cetificate,wcl_cominfo.zidcode
+            ,wcl_cominfo.address,wcl_cominfo.name as companyname,wcl_province.name as province_name,wcl_city.name as city_name,
+            wcl_industry.name as industry_name,wcl_cominfo.updated_at,wcl_companytype.name as companytype_name')
             ->select();
         /**
          * 获取相应职位信息
@@ -217,6 +223,43 @@ class IndexController extends Controller
             ->field('wcl_post.peoplenumber,wcl_post.birthday,wcl_post.contact
             ,wcl_post.mobile,wcl_post.netaddress,wcl_post.context,wcl_post.house,wcl_salary.cash,
             wcl_worktime.name,wcl_function.name')
+            ->select();
+        $this->display();
+    }
+
+    /**
+     * 获取简历投递记录
+     */
+    public function postRecords()
+    {
+        /**
+         * 取得当前用户的id
+         */
+        $user_id = $_SESSION['sess_wcl']['id'];
+        /**
+         * 与user_post表进行连接，取得用户的职位投递记录
+         */
+        $user = M('user');
+        /**
+         * 总投递数
+         */
+        $this->records_sum = $user
+            ->where(["wcl_user.id=$user_id"])
+            ->join('left join wcl_user_post on wcl_user.id=wcl_user_post.user_id')
+            ->count();
+        /**
+         * 获得投递的职位信息
+         */
+        $this->post_list = $user
+            ->where(["wcl_user.id=$user_id"])
+            ->join('left join wcl_user_post on wcl_user.id=wcl_user_post.user_id')
+            ->join('left join wcl_post on wcl_user_post.post_id=wcl_post.id')
+            ->join('left join wcl_cominfo on wcl_post.companyinfo_id = wcl_cominfo.id')
+            ->join('left join wcl_salary on wcl_salary.id = wcl_post.salary_id')
+            ->join('left join wcl_worktime on wcl_worktime.id = wcl_post.worktime_id')
+            ->join('left join wcl_function on wcl_function.id = wcl_post.function_id')
+            ->join('left join wcl_industry on wcl_industry.id = wcl_function.industry_id')
+            ->field('wcl_user_post.created_at,wcl_function.name as function_name,wcl_cominfo.name as company_name,wcl_post.id')
             ->select();
         $this->display();
     }

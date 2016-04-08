@@ -19,38 +19,27 @@
         </ul>
     </div>
     <div class="row col-md-8 col-md-offset-2" id="body">
-        <div class="col-md-4" id="body_left">
-            <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">简历向导</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/CV/Index/BasicAdd">基本信息创建</a></li>
-                        <li><a href="/Job/Index/jobAdd">求职意向创建</a></li>
-                        <li><a href="/Edu/Index/eduAdd">教育经历创建</a></li>
-
-                    </ul>
-                </li>
-                <li role="separator" class="divider"></li>
-                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">求职管理</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/User/index/postRecords">简历投递记录</a></li>
-                        <li><a href="#">企业关注</a></li>
-                        <li><a href="#">回收站</a></li>
-                    </ul>
-                </li>
-                <li role="separator" class="divider"></li>
-                <li role="presentation" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">个人中心</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/CV/Index/help">在线帮助</a></li>
-                        <li><a href="/User/index/logout">退出账户</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="row">
+            <h4 class="text-danger">总投递数：{$records_sum}</h4>
         </div>
-        <div class="col-md-7 col-md-offset-1" id="body_right">
+   <div class="row"></div>
+        <div class="row">
+            <table class="table table-bordered table-condensed table-striped text-center">
+                <caption><h3>职位投递信息</h3></caption>
+                <tr>
+                    <td>企业名称</td>
+                    <td>应聘职位</td>
+                    <td>投递时间</td>
 
+                </tr>
+                <foreach name="post_list" item="post">
+                    <tr>
+                        <td><a href="/User/index/postShow/post_id/{$post.id}">{$post.company_name}</a></td>
+                        <td>{$post.function_name}</td>
+                        <td>{$post.created_at}</td>
+                    </tr>
+                </foreach>
+            </table>
         </div>
     </div>
     <div class="row col-md-8 col-md-offset-2"></div>
