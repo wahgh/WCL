@@ -7,28 +7,40 @@ class IndexController extends Controller
 {
     public function index()
     {
+//       $post = M('post');
+//       $maxid=$post->max('id');
+//       $postCount = $post->count();
+//       $condition['id'] = array(array('lt',($maxid-$postCount)),array('gt',$maxid));
+//       $this->post_list= $post
+//           ->where($condition['id'])
+//           ->join('left join wcl_function on wcl_post.function_id=wcl_function.id')
+//           ->join('left join wcl_salary on wcl_post.salary_id=wcl_salary.id')
+//            ->field('wcl_function.name as function_name,wcl_post.peoplenumber,wcl_salary.cash as salary_cash,
+//          wcl_post.mobile,wcl_post.contact')
+//          ->select();
+
         /**
-         * µ½Ê×Ò³ÓĞÈıÖÖÇé¿ö£¬
-         * 1£ºµÚÒ»´Î½øÊ×Ò³£¬Ë­¶¼¿ÉÒÔ½ø
-         * 2£ºµÇÂ¼Ö®ºóµã»÷Ê×Ò³µØÖ·
-         * 3£ºÍË³öÖ®ºó£¬ÎŞÂÛÊÇÒ»°ãÓÃ»§»¹ÊÇÆóÒµÓÃ»§ÍË³ö¶¼µ½Ê×Ò³
+         * ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+         * 1ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ë­ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½
+         * 2ï¿½ï¿½ï¿½ï¿½Â¼Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ö·
+         * 3ï¿½ï¿½ï¿½Ë³ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½Ã»ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³
          */
         if (isset($_SESSION['sess_wcl']['is_auth']) && $_SESSION['sess_wcl']['is_auth']) {
             /**
-             * ÊÇÆÕÍ¨ÓÃ»§µÇÂ¼Ö®ºó´ÓÆäËûÒ³Ãæ¹ıÀ´µÄ£¬²¢Ã»ÓĞÍË³ö£¬ÕâÊ±ºòÄÃµ½sessionÀïÃæµÄnameÏÔÊ¾ÔÚÒ³ÃæÉÏ
+             * ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Ã»ï¿½ï¿½ï¿½Â¼Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ãµï¿½sessionï¿½ï¿½ï¿½ï¿½ï¿½nameï¿½ï¿½Ê¾ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
              */
             $this->username = $_SESSION['sess_wcl']['username'];
             $this->mark = 'user';
         } else {
             if (isset($_SESSION['sess_wcl']['company_auth']) && $_SESSION['sess_wcl']['company_auth']) {
                 /**
-                 * ÊÇÆÕÍ¨ÓÃ»§µÇÂ¼Ö®ºó´ÓÆäËûÒ³Ãæ¹ıÀ´µÄ£¬²¢Ã»ÓĞÍË³ö£¬ÕâÊ±ºòÄÃµ½sessionÀïÃæµÄnameÏÔÊ¾ÔÚÒ³ÃæÉÏ
+                 * ï¿½ï¿½ï¿½ï¿½Í¨ï¿½Ã»ï¿½ï¿½ï¿½Â¼Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ãµï¿½sessionï¿½ï¿½ï¿½ï¿½ï¿½nameï¿½ï¿½Ê¾ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
                  */
                 $this->username = $_SESSION['sess_wcl']['username'];
                 $this->mark = 'company';
             } else {
                 /**
-                 * ·ÇµÇÂ¼×´Ì¬¸³ÖµÎª¡®¡¯
+                 * ï¿½Çµï¿½Â¼×´Ì¬ï¿½ï¿½ÖµÎªï¿½ï¿½ï¿½ï¿½
                  */
                 $this->username = '';
                 $this->mark = '';
