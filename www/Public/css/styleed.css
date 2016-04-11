@@ -278,7 +278,6 @@ span.error {
     font-size: 14px;
     width: 741px;
     height: 81px;
-    background: url(img/remind.png) 70px 10px no-repeat;
     padding: 23px 0 0 283px;
     margin: 0 auto;
 }
@@ -366,7 +365,6 @@ span.error {
     top: 10px;
     width: 23px;
     height: 15px;
-    background: url(img/icon_new.png) right top no-repeat;
 }
 
 #navheader li b {
@@ -537,7 +535,6 @@ span.error {
     height: 12px;
     display: inline-block;
     margin-left: 10px;
-    background: url(img/close_notice.png) no-repeat;
     transition: all .5s;
     -moz-transition: all .5s;
     -webkit-transition: all .5s;
@@ -595,6 +592,8 @@ span.error {
     border: 2px solid #019875;
     width: 740px;
     height: 37px;
+    margin-left: 20px;
+    margin-top: 28px;
     position: relative;
 }
 
@@ -605,7 +604,7 @@ span.error {
     float: left;
     font-size: 16px;
     padding: 7px 8px 7px 10px;
-    margin: 0 0 0 94px;
+    margin: 0 0 0 5px;
     border: 0;
 }
 
@@ -683,12 +682,9 @@ span.error {
     transition: all 0.4s ease 0s;
 }
 
-#sidebar {
-    width: 230px;
-    position: absolute;
-    z-index: 101;
-    *position: relative;
-    *float: left;
+.col-md-8{
+    padding-right: 2px;
+    padding-left: 2px;
 }
 
 .fixed {
@@ -719,7 +715,6 @@ span.error {
 #sidebar .menu_main h2 span {
     width: 13px;
     height: 14px;
-    background: url(img/arr.png) 0 0 no-repeat;
     float: right;
     margin-top: 3px;
     *margin-top: -15px;
@@ -791,7 +786,6 @@ span.error {
 #sidebar .menu_sub dd a {
     white-space: nowrap;
     padding: 0 10px;
-    background: url(img/arr.png) -29px center no-repeat;
     color: #777;
     line-height: 28px;
     margin-left: -1px;
@@ -812,7 +806,6 @@ span.error {
     font-size: 18px;
     height: 46px;
     line-height: 46px;
-    background: #fafafa url(img/sub_icon.png) 180px center no-repeat;
     padding: 0 80px 0 20px;
     margin-top: 12px;
     border-bottom: 2px solid #019875;
@@ -959,7 +952,6 @@ ul.hot_tags {
 #home_banner .banner_control em {
     width: 127px;
     height: 50px;
-    background: url(img/control_current.png) 0 0 no-repeat;
     position: absolute;
     z-index: 21;
     top: 0;
@@ -981,7 +973,6 @@ ul.hot_tags {
 }
 
 #home_banner .thumbs li i {
-    background: url(img/thumb_cover.png) no-repeat;
     width: 113px;
     height: 42px;
     position: absolute
@@ -1026,7 +1017,6 @@ ul.hotabbing li i {
     position: absolute;
     right: -10px;
     top: -5px;
-    background: url(img/icon_new.png) left top no-repeat;
 }
 
 ul.hot_pos {
@@ -1043,7 +1033,6 @@ ul.hot_pos i {
     width: 12px;
     height: 14px;
     position: absolute;
-    background: url(img/hot.png) left top no-repeat;
     left: 0;
 }
 
@@ -1192,7 +1181,6 @@ ul.hot_pos i {
 .btn {
     font-size: 16px;
     color: #fff;
-    background: #0d9572 url(img/arrow.png) 88px center no-repeat;
     padding: 5px 40px 5px 15px;
     margin: 10px 0 0 0;
 }
@@ -1204,7 +1192,6 @@ ul.hot_pos i {
 
 #backtop {
     display: none;
-    background: url(img/backtop.png) left top no-repeat;
     width: 28px;
     height: 64px;
     position: fixed;
@@ -1218,7 +1205,6 @@ ul.hot_pos i {
 }
 
 #qrSide {
-    background: url(img/qr_index.jpg) no-repeat;
     width: 108px;
     height: 132px;
     position: fixed;
@@ -1228,7 +1214,6 @@ ul.hot_pos i {
 }
 
 #qrSide a {
-    background: #cfd0d2 url(img/x.png) no-repeat;
     position: absolute;
     right: 0;
     top: -15px;
@@ -1261,7 +1246,6 @@ ul.hot_pos i {
 .footer_qr i {
     display: none;
     border: 3px solid #0D9572;
-    background: url(img/qrcode.jpg) no-repeat;
     width: 242px;
     height: 242px;
     position: absolute;
@@ -1322,7 +1306,7 @@ ul.hot_pos i {
 #selected li span.select_remove {
     width: 9px;
     height: 9px;
-    background: url(img/xs.png) no-repeat;
+
     cursor: pointer;
     margin: 8px 0 0 12px;
 }
@@ -1459,7 +1443,6 @@ ul.hot_pos i {
     height: 160px;
     font-size: 24px;
     color: #555;
-    background: #fafafa url(img/noresult.png) 80px 55px no-repeat;
     padding: 120px 0 0 220px;
     margin-top: 15px;
     line-height: 32px;
@@ -1474,7 +1457,6 @@ ul.hot_pos i {
     margin: 20px 0 0 0;
     border-top: 3px solid #747676;
     border-bottom: 3px solid #dadada;
-    background: url(img/subscribe_bg.jpg) repeat;
     padding: 20px;
 }
 
@@ -1554,7 +1536,6 @@ ul.hot_pos i {
 /* .wp_cl{margin-top:-33px !important;*margin:0 0 10px -10px !important;} */
 /*login.html*/
 #login_bg {
-    background: #019875 url(img/bgwall.png) center 100px no-repeat;
     overflow: hidden;
 }
 
@@ -1595,7 +1576,6 @@ ul.hot_pos i {
 }
 
 .login_box_btm {
-    background: url(img/login_btm.png) repeat-x;
     height: 10px;
 }
 
@@ -1694,7 +1674,6 @@ ul.hot_pos i {
 
 .registor_now {
     color: #019875;
-    background: url(img/registor_now.png) right center no-repeat;
     padding-right: 24px;
     float: left;
     height: 30px;
@@ -1715,7 +1694,6 @@ ul.hot_pos i {
     width: 54px;
     height: 54px;
     float: left;
-    background: url(img/wbqq.png) left top no-repeat;
     margin: 0 30px 0 10px;
 }
 
@@ -1723,7 +1701,6 @@ ul.hot_pos i {
     width: 54px;
     height: 54px;
     float: left;
-    background: url(img/wbqq.png) right top no-repeat;
 }
 
 .login_wrapper input[type="text"], .login_wrapper input[type="password"] {
@@ -1794,7 +1771,6 @@ ul.hot_pos i {
 }
 
 .register_radio li em {
-    background: url(img/s_choose.png) no-repeat;
     width: 31px;
     height: 32px;
     position: absolute;
@@ -1999,7 +1975,6 @@ ul.hot_pos i {
 .subscribe_side {
     border-top: 3px solid #747778;
     border-bottom: 3px solid #dadada;
-    background: url(img/subscribe_bg.jpg) repeat;
     padding: 25px 16px 15px 16px;
     line-height: 30px;
     overflow: hidden;
@@ -2187,7 +2162,6 @@ ul.hot_pos i {
 }
 
 .resume {
-    background: #f2f2f2 url(img/resume.png) 40px 20px no-repeat;
     padding-left: 100px;
     margin: 30px 0 0;
     overflow: hidden;
@@ -2241,11 +2215,10 @@ ul.hot_pos i {
 }
 
 .resume_web {
-    background-image: url(img/resume_web.png);
+
 }
 
 .job_detail dd.unresume {
-    background: #f2f2f2 url(img/unresume.png) 40px 20px no-repeat;
     padding-left: 80px;
     margin: 30px 0 0;
     overflow: hidden;
@@ -2279,7 +2252,6 @@ ul.hot_pos i {
     position: relative;
     padding-bottom: 25px;
     margin-bottom: 10px;
-    background: url(img/breakline.gif) center bottom repeat-x;
 }
 
 .job_company dt a {
@@ -2487,7 +2459,6 @@ ul.hot_pos i {
     width: 48px;
     height: 71px;
     cursor: pointer;
-    background: url(img/saoma.png) 0 0 no-repeat;
     position: relative;
     float: right;
     margin: 0;
@@ -2508,7 +2479,7 @@ ul.hot_pos i {
 .dropdown_menu {
     width: 288px;
     height: 154px;
-    background: url(img/saowo_bg.png) no-repeat;
+
     color: #fff;
     display: block;
     *position: relative;
@@ -2537,7 +2508,7 @@ ul.hot_pos i {
 .drop_r .drop_title {
     width: 163px;
     height: 54px;
-    background: url(img/saowo_title.png) no-repeat;
+
     *margin: 0 !important;
 }
 
@@ -2655,7 +2626,7 @@ ul.hot_pos i {
 .jd_item_star {
     width: 98px;
     height: 16px;
-    background: url(img/stars.png) 0 0 no-repeat;
+
     margin: 3px 0 0 10px;
 }
 
@@ -2747,7 +2718,7 @@ ul.hot_pos i {
     right: 6px;
     width: 20px;
     height: 20px;
-    background: url(img/edit.png) 0 0 no-repeat;
+
 }
 
 .sclose:hover {
@@ -2760,7 +2731,7 @@ ul.hot_pos i {
     right: 6px;
     width: 20px;
     height: 20px;
-    background: url(img/edit.png) 0 -20px no-repeat;
+
 }
 
 .sedit:hover {
@@ -2847,7 +2818,7 @@ ul.hot_pos i {
 
 /**add by nancy rss页面的圆点**/
 .rss_circle {
-    background: url(img/rss_circle.png) no-repeat;
+
     width: 4px;
     height: 3px;
     display: inline-block;
@@ -2858,7 +2829,7 @@ ul.hot_pos i {
 
 /**add end by nancy**/
 .s_form h3 em {
-    background: url(img/s_arrow.png) no-repeat;
+
     width: 10px;
     height: 14px;
     position: absolute;
@@ -2901,7 +2872,7 @@ ul.hot_pos i {
 }
 
 .s_radio li em, .s_radio_sp li em {
-    background: url(img/s_choose.png) no-repeat;
+
     width: 31px;
     height: 32px;
     position: absolute;
@@ -2923,7 +2894,7 @@ ul.hot_pos i {
 }
 
 .select {
-    background: url(img/select.gif) no-repeat;
+
     width: 625px;
     height: 46px;
     padding-left: 12px;
@@ -2935,7 +2906,7 @@ ul.hot_pos i {
 }
 
 .select_short {
-    background: url(img/select_short.png) no-repeat;
+
     width: 228px;
     height: 46px;
     padding-left: 12px;
@@ -3025,7 +2996,6 @@ ul.hot_pos i {
     line-height: 38px;
     margin: 0 13px 13px 0;
     padding-left: 10px;
-    background: #f1f1f1 url(img/select_arrow.png) 116px 15px no-repeat;
     float: left;
     cursor: pointer;
 }
@@ -3298,16 +3268,14 @@ ul.hot_pos i {
 }
 
 .c_box em {
-    background: url(img/unvalid.png) no-repeat;
+
     width: 15px;
     height: 19px;
     float: left;
     margin: 3px 0 0 10px;
 }
 
-.c_box em.valid {
-    background: url(img/valid.png) no-repeat;
-}
+
 
 .c_box span.va {
     width: 90px;
@@ -3375,7 +3343,7 @@ ul.hot_pos i {
 }
 
 .quote1 {
-    background: url(img/quote_l.png) no-repeat;
+
     width: 17px;
     height: 15px;
     float: left;
@@ -3383,7 +3351,7 @@ ul.hot_pos i {
 }
 
 .quote2 {
-    background: url(img/quote_r.png) no-repeat;
+
     width: 17px;
     height: 15px;
     margin-left: 5px;
@@ -3768,7 +3736,6 @@ ul.hot_pos i {
 }
 
 .c_section h2 em {
-    background: url(img/title_arrow01.png) no-repeat;
     width: 6px;
     height: 8px;
     position: absolute;
@@ -12235,7 +12202,6 @@ ul.my_collections li i {
 #tip_didi_img {
     width: 273px;
     height: 118px;
-    background: url(img/tip_didi.png) no-repeat;
     position: absolute;
     z-index: 100;
     margin: -20px 0 0 140px;
@@ -12248,5 +12214,6 @@ ul.my_collections li i {
     height: 28px;
     margin: 75px 0 0 97px;
 }
+
 
 /*end*/
