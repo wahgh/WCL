@@ -58,7 +58,7 @@ input[type="text"], input[type="password"] {
     border: 2px solid #f1f1f1;
     outline: none;
     font: 20px/32px "微软雅黑", "宋体", Arial;
-    width: 600px;
+    width: 298px;
     height: 30px;
     padding: 6px 10px;
     margin-top: 20px;
@@ -592,8 +592,6 @@ span.error {
     border: 2px solid #019875;
     width: 740px;
     height: 37px;
-    margin-left: 20px;
-    margin-top: 28px;
     position: relative;
 }
 
@@ -604,7 +602,7 @@ span.error {
     float: left;
     font-size: 16px;
     padding: 7px 8px 7px 10px;
-    margin: 0 0 0 5px;
+    margin: 0 0 0 94px;
     border: 0;
 }
 
@@ -2106,7 +2104,6 @@ ul.hot_pos i {
 .job_detail .edit {
     width: 25px;
     height: 25px;
-    background: url(img/c_edit.png) 0 1px no-repeat;
     float: right;
     margin: 30px 0px 0 20px;
 }
@@ -2127,7 +2124,6 @@ ul.hot_pos i {
 
 .job_request span {
     padding-left: 20px;
-    background: url(img/jd_icon.png) left center no-repeat;
 }
 
 .job_request span.red {
@@ -3351,7 +3347,6 @@ ul.hot_pos i {
 }
 
 .quote2 {
-
     width: 17px;
     height: 15px;
     margin-left: 5px;
@@ -7766,8 +7761,8 @@ ul.my_delivery {
     width: 166px
 }
 
-#profileForm input[name="tel"], #profileForm input[name="email"] {
-    width: 386px
+#profileForm input[name="tel"], #profileForm input[name="username"] {
+    width: 298px
 }
 
 .profile_radio {
@@ -12213,6 +12208,12 @@ ul.my_collections li i {
     width: 86px;
     height: 28px;
     margin: 75px 0 0 97px;
+}
+#yzm{
+    width: 142px;
+}
+#loginForm img{
+    margin-left: 2px;
 }
 
 

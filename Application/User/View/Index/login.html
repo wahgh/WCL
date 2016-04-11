@@ -1,104 +1,73 @@
-<div class="container col-md-8 col-md-offset-2" id="body">
-    <div class="row" id="login_top">
-        <div class="col-md-2">
+<div id="login_bg" style="background-color: #00B38A">
+    <div class="login_wrapper">
+        <div class="login_header">
+            <img src="/Public/images/logologin.png" width="285" height="62"/>
+
+            <div id="cloud_s"><img src="/Public/images/cloud_s.png" width="81" height="52" alt="cloud"/></div>
+            <div id="cloud_m"><img src="/Public/images/cloud_m.png" width="136" height="95" alt="cloud"/></div>
         </div>
-        <div class="col-md-2 col-md-offset-8">
-            <a href="/Home/index/view">首页</a>
-            <a href="/CV/Index/help">帮助中心</a>
-        </div>
-    </div>
-    <div class="row col-md-4" id="logo"></div>
-    <div class="row" id="top">
-        <h3 class="text-center">会员登录</h3>
-    </div>
-    <div class="row" id="content">
-        <div class="col-md-3" id="left">
-        </div>
-        <div class="col-md-6 table-bordered" id="center">
-            <form class="form-horizontal" role="form" data-toggle="validator" method="post"
-                  action="/User/index/logincheck" id="loginform">
-                <div class="form-group  has-feedback">
-                    <label class="control-label col-md-2 col-md-offset-1" for="username">用户名</label>
 
-                    <div class="col-md-9">
-                        <input class="form-control" type="text" name="username" id="username" placeholder="用户名/邮箱/手机"
-                               data-error="用户名不能为空！" required/>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        <input type="hidden" id="resubmitToken" value=""/>
 
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                <div class="form-group has-feedback">
-                    <label class="control-label col-md-2 col-md-offset-1" for="password">密码</label>
+        <div class="login_box">
+            <form id="loginForm" action="/User/index/logincheck" class="form-horizontal" role="form" data-toggle="validator" method="post">
+                <input style="color: #777" type="text" name="username" id="username" placeholder="用户名/邮箱/手机"
+                       data-error="用户名不能为空！" required tabindex="1"/>
+                <input type="password" name="password" id="password" placeholder="密码"
+                       data-error="密码不能为空" required tabindex="2"/>
+                <input style="color: #777" class="form-control col-md-8" type="text" name="yzm" id="yzm"
+                       placeholder="验证码" data-error="验证码不能为空！" required/>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <img style="display: block; float: right;" src="/User/Index/yzm" title="验证码" width="156px" height="35px"
+                     onclick="this.src='/User/Index/yzm/' + Math.random()"/>
 
-                    <div class="col-md-9">
-                        <input class="form-control" type="password" name="password" id="password" placeholder="密码"
-                               data-error="密码不能为空" required/>
+                <!--<input type="submit" id="submitLogin" value="登 &nbsp; &nbsp; 录" />-->
+                <a style="color:#fff;" href="index.html" class="submitLogin" title="登 &nbsp; &nbsp; 录"/>登 &nbsp; &nbsp;
+                录</a>
 
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                <div class="form-group has-feedback">
-                    <label class="control-label col-md-3" for="yzm">图形验证</label>
-
-                    <div class="col-md-4">
-                        <input class="form-control col-md-8" type="text" name="yzm" id="yzm"
-                               placeholder="验证码" data-error="验证码不能为空！" required/>
-
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <div class="col-md-5">
-                        <img src="/User/Index/yzm" title="验证码" width="156px" height="35px"
-                             onclick="this.src='/User/Index/yzm/' + Math.random()"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3"></label>
-
-                    <div class="col-md-7">
-                        <input class="col-md-12 btn btn-primary" type="submit" name="register" value="立即登录"/>
-                    </div>
-                </div>
             </form>
-        </div>
-        <div class="col-md-3" id="right">
-            <div>
-               <div>
-                   <h4>还不是会员?</h4>
-                   <a href="/User/index/register" class="btn btn-primary">前去注册</a>
-               </div>
+            <div class="login_right">
+                <div>还没有帐号？</div>
+                <a href="/User/index/register" class="registor_now">立即注册</a>
+
             </div>
         </div>
-    </div>
-    <div class="row" id="bottom">
-        <div class="col-md-4">
-            <address>
-                <strong>地址</strong><br>
-                安徽省合肥市庐阳区<br>
-                财富广场A座901<br>
-            </address>
-        </div>
-        <div class="col-md-4 text-center">
-            <address>
-                <strong>联系方式</strong><br>
-                <abbr title="Phone">电话:</abbr> (123) 456-7890
-            </address>
-        </div>
-        <div class="col-md-4 text-center">
-            <address>
-                <strong>工作时间</strong><br>
-                上午9：00<br/>
-                下午2:00<br/>
-            </address>
-        </div>
+        <div class="login_box_btm"></div>
     </div>
 </div>
-<!--表单验证-->
 <script type="text/javascript">
+    $(function () {
+        //验证表单
+        $("#loginForm").validate({
+            /* onkeyup: false,
+             focusCleanup:true, */
+            rules: {
+                username: {
+                    required: true,
+                    username: true
+                },
+                password: {
+                    required: true
+                },
+                yzm: {
+                    required: true
+                }
+            },
+            messages: {
+                username: {
+                    required: "请输入用户名",
+                },
+                password: {
+                    required: "请输入密码"
+                },
+                yzm: {
+                    required: "请输入验证码"
+                }
+            },
+        });
+    })
     $('#loginform').validator();
-
 </script>
+
+<!--表单验证-->
