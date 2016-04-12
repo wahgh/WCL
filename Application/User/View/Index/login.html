@@ -1,4 +1,5 @@
-<div id="login_bg" style="background-color: #00B38A">
+<body style="background-color: #00B38A">
+<div id="login_bg" >
     <div class="login_wrapper">
         <div class="login_header">
             <img src="/Public/images/logologin.png" width="285" height="62"/>
@@ -22,8 +23,8 @@
                      onclick="this.src='/User/Index/yzm/' + Math.random()"/>
 
                 <!--<input type="submit" id="submitLogin" value="登 &nbsp; &nbsp; 录" />-->
-                <a style="color:#fff;" href="index.html" class="submitLogin" title="登 &nbsp; &nbsp; 录"/>登 &nbsp; &nbsp;
-                录</a>
+                <button style="color:#fff;" href="index.html" class="submitLogin" title="登 &nbsp; &nbsp; 录"/>登 &nbsp; &nbsp;
+                录</button>
 
 
             </form>
@@ -36,6 +37,7 @@
         <div class="login_box_btm"></div>
     </div>
 </div>
+<!--表单验证-->
 <script type="text/javascript">
     $(function () {
         //验证表单
@@ -69,5 +71,7 @@
     })
     $('#loginform').validator();
 </script>
+</body>
 
-<!--表单验证-->
+
+

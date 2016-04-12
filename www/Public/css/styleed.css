@@ -559,6 +559,8 @@ span.error {
     width: 744px;
     height: 41px;
     position: relative;
+    margin-left: 20px;
+    margin-top: 50px;
 }
 
 #search_input {
@@ -1180,7 +1182,6 @@ ul.hot_pos i {
     font-size: 16px;
     color: #fff;
     padding: 5px 40px 5px 15px;
-    margin: 10px 0 0 0;
 }
 
 .btn:hover {

@@ -1,5 +1,5 @@
 #center,#register_top,#login_top{
-    background-color: #00b38a;
+    background-color: white;
 }
 
 #loginform {
@@ -11,4 +11,21 @@
     display: block;
     height: 57px;
     width: 350px;
+}
+.log{
+    margin-top: 162px;
+}
+.form-group{
+    margin-top: 30px;
+    margin-right: 5px;
+}
+.form-horizontal .form-group {
+    margin-left: -15px;
+    margin-right: 46px;
+}
+
+.text-center{
+    text-align: center;
+   font-family: "Î¢ÈíÑÅºÚ", "ËÎÌå", Arial;
+
 }
